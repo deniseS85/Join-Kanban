@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/board.css">
+    <link rel="stylesheet" href="styles/add_task.css">
+    <script src="scripts/add_task.js"></script>
+    <script src="scripts/add_task-check.js"></script>
+    <script src="scripts/add_task-render.js"></script>
+    <script src="scripts/board.js"></script>
+    <script src="scripts/board_requests.js"></script>
+    <script src="scripts/drag_and_drop.js"></script>
+    <script src="scripts/board_editcard.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/board_generate_HTML.js"></script>
+    <script src="./smallest_backend_ever/mini_backend.js"></script>
+    
+    <title>Board</title>
+</head>
+<body id="body" onload="initBoard()">
+    <div w3-include-html="assets/templates/desktop_template.html"></div>
+
+    <div id="content" class="content" onclick="closeToolTip(this)">
+        <div class="content-fix-board">
+            <div class="header-board">
+                <div class="project-name">Kanban Project Management Tool</div>
+                <div class="title">Board</div>
+                <div class="title-container-right">
+                    <div class="input-container">
+                        <div class="input-field">
+                            <input onkeyup="filterInput(this)" id="input" type="search" onsearch="clearInput()" placeholder="Find Task">
+                            <div class="input-container-right">
+                                <img class="dividing-line" src="assets/img/separateLine.png">
+                                <img onclick="filterInput()" class="search-icon" src="assets/img/search.png">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="overlay-add-task-btn" onclick="overlayAddTask()">
+                        <div class="button-text">Add task</div>
+                        <img src="assets/img/add-button.png">
+                    </button>
+                </div>
+            </div>
+
+            <div class="working-process-bar">
+                <div class="process-section">
+                    <div class="process-item">
+                        <div>To do</div>
+                         <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('ToDo')">   
+                    </div>
+                </div>
+
+                <div class="process-section">
+                    <div class="process-item">
+                        <div>In progress</div>
+                        <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('progress')">
+                    </div>
+                </div>
+
+                <div class="process-section">
+                    <div class="process-item">
+                        <div>Awaiting Feedback</div>
+                        <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('await')">
+                    </div>
+                </div>
+
+                <div class="process-section">
+                    <div class="process-item">
+                        <div>Done</div>
+                        <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('done')">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cards" class="cards">
+
+            <div class="process-section">
+                <div class="process-item-responsiv">
+                    <div>ToDo</div>
+                     <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('ToDo')">   
+                </div>
+                <div class="cardContainer" id="ToDo" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+
+            <div class="process-section">
+                <div class="process-item-responsiv">
+                    <div>In progress</div>
+                    <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('progress')">
+                </div>
+                <div class="cardContainer" id="progress" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+
+            <div class="process-section">
+                <div class="process-item-responsiv">
+                    <div>Awaiting Feedback</div>
+                    <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('await')">
+                </div>
+                <div class="cardContainer" id="await" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+
+            <div class="process-section">
+                <div class="process-item-responsiv">
+                    <div>Done</div>
+                    <img onmouseover="hover(this);" onmouseout="unhover(this);" src="assets/img/add-task-icon.png" onclick="overlayAddTask('done')">
+                </div>
+                <div class="cardContainer" id="done" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+        </div> 
+        
+        <div id="task-overlay" style="display: none;">
+            <div class="popUpCardBackground" onclick="closePopUpAddTask()">
+                <div class="task-content" onclick="doNotCloseOverlay(event)">
+                    <div class="template-add-task" w3-include-html="assets/templates/add_task_template.html"></div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <div w3-include-html="assets/templates/mobile_template.html"></div>
+</body>
+</html>

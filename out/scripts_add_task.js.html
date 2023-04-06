@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/add_task.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/add_task.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var usersArray = []; // Users from - for Database
+var categoryArray = []; // Category from - for Database
+var taskArray = []; // Tasks from - for Database
+
+var expandedAssignedTo = false; // boolean for Assigned To Dropdown
+var expandedCategory = false; // boolean for Category Dropdown
+var selectedCategoryColor = null; // color name for new Category
+var selectedCategory = []; // selected Category for pushing in task Array
+var assignToArray = []; // Task assign to array
+var prio; // Task prio
+var subtasks = []; // Task Subtasks
+
+/**
+ * initialization
+ */
+async function init() {
+    await includeHTML();
+    setURL('https://gruppen-join-459.developerakademie.net/smallest_backend_ever');
+    await loadFromDB(); // load Users and Category from Database
+    renderCategory();
+    renderAssignDropdown();
+    setDueDateMinToday(); // set today as min. Date
+    generateNav();
+}
+
+/**
+ * create Task if all required Fields filled
+ */
+async function createTask() {
+    let title = checkTitle();
+    let description = checkDescription();
+    checkPrio();
+
+    if(title &amp;&amp; description &amp;&amp; prio) {
+        let categoryIndex = await newCategoryPush();
+
+        let dueDate = getDueDate();
+        sendTaskToDB(title, description, categoryIndex, dueDate);
+    }
+}
+ /**
+  * send Task to DB and go to Board
+  * @param {string} title - input of title inputbox
+  * @param {string} description - input of description inputbox
+  * @param {number} categoryIndex - index of selected Category in categoryArray
+  * @param {date} dueDate - input of due date inputbox
+  */
+async function sendTaskToDB(title, description, categoryIndex, dueDate) {
+    if(searchIndexInArrayTasks(title, taskArray) &lt; 0) {
+        let task = [{'title': title, 'description': description, 'category': categoryIndex, 'assigned_to': assignToArray, 'due_date': dueDate, 'prio': prio, 'subtasks': subtasks}];
+        await addToDBTask(task);
+        createTaskMessage();
+    } else {
+        document.getElementById('error-title').innerHTML = 'Title already exist as a task!';
+    }
+}
+
+// ========== TITLE ==========
+/**
+ * check if Title exist
+ * @returns - input of Title Input box
+ */
+function checkTitle() {
+    let input = document.getElementById('new_task-title');
+    let error = document.getElementById('error-title');
+
+    if(input.value.length &lt; 1) {
+        error.innerHTML = 'This field is required';
+    } else {
+        error.innerHTML = '';
+        return input.value;
+    }
+}
+
+/**
+ * searched element in array['title']
+ * @param {string} searchTerm - searched element in array
+ * @param {array} array - array to searching element
+ * @returns 
+ */
+function searchIndexInArrayTasks(searchTerm, array) {
+    var index = array.findIndex(function(item, i){
+      return item.title === searchTerm
+    });
+    
+    return index; //Output Index or -1
+}
+
+// ========== DESCRIPTION ==========
+/**
+ * check if Description exist
+ * @returns - input of Description Input box
+ */
+function checkDescription() {
+    let input = document.getElementById('new_task-description');
+    let error = document.getElementById('error-description');
+
+    if(input.value.length &lt; 1) {
+        error.innerHTML = 'This field is required';
+    } else {
+        error.innerHTML = '';
+        return input.value;
+    }
+}
+
+// ========== CATEGORY DROPDOWN BOX ==========
+/**
+ * call render function for Category Dropdown and Color
+ */
+function renderCategory() {
+    renderCategoryDropdown();
+    renderCategoryColors();
+}
+
+/**
+ * render Category in Category Dropdown
+ */
+function renderCategoryDropdown() {
+    let categoryArea = document.getElementById('checkbox-category');
+    categoryArea.innerHTML = '';
+
+    for (let i = 0; i &lt; categoryArray.length; i++) {
+        const element = categoryArray[i];
+        categoryArea.innerHTML += categoryDropdownTemplate(i, element);
+    }
+}
+
+/**
+ * render Colors for Category
+ */
+function renderCategoryColors() {
+    let categoryColorArea = document.getElementById('category-color');
+    categoryColorArea.innerHTML = '';
+
+    for (let i = 0; i &lt; categoryArray.length; i++) {
+        const element = categoryArray[i];
+        categoryColorArea.innerHTML += `
+        &lt;div id="category-color-${i}" onclick="selectCategoryColor(${i})" style="background-color: ${element['color']}">&lt;/div>`;
+    }
+}
+
+/**
+ * template for render Category. fill Category Dropdown
+ * @param {number} i - index
+ * @param {object} element - Array Element
+ * @returns 
+ */
+function categoryDropdownTemplate(i, element) {
+    return `
+    &lt;div class="checkboxes-element" onclick="selectCategory(${i})">
+        &lt;div id="category-${i}" class="category-color" style='background-color: ${element['color']}'>&lt;/div>
+        ${element['name']}
+    &lt;/div>`;
+}
+
+/**
+ * Expand 'Category' Dropbox
+ */
+function openDropdownCategory() {
+    if (!expandedCategory) {
+        document.getElementById("checkboxes-category").classList.remove('d-none');
+        document.getElementById("checkboxes-category").style.animation = "extend 255ms linear forwards";
+        document.getElementById("select-category").classList.add('selectBox-focus');
+        expandedCategory = true;
+    } else {
+        closeDropdownCategory();
+    }
+}
+
+/**
+ * Close 'Category' Dropdown
+ */
+function closeDropdownCategory() {
+    setTimeout(() => {
+        document.getElementById("checkboxes-category").classList.add('d-none');
+        document.getElementById("select-category").classList.remove('selectBox-focus');
+    }, '255')
+    document.getElementById("checkboxes-category").style.animation = "collapse 255ms linear forwards";
+    expandedCategory = false;
+}
+
+/**
+ * show 'new Category' input
+ */
+function addTaskNewCategory() {
+    document.getElementById('category-container').classList.add('d-none');
+    document.getElementById('new-category').classList.remove('d-none');
+    document.getElementById('category-color').classList.remove('d-none');
+}
+
+/**
+ * close 'new Category'
+ */
+function clearNewCategory() {
+    document.getElementById('new-category-input').value = '';
+    document.getElementById('error-new_category').innerHTML = '';
+
+    document.getElementById('category-container').classList.remove('d-none');
+    document.getElementById('new-category').classList.add('d-none');
+    document.getElementById('category-color').classList.add('d-none');
+
+    document.getElementById("checkboxes-category").classList.add('d-none');
+    document.getElementById("select-category").classList.remove('selectBox-focus')
+    expandedCategory = false;
+    //closeDropdownCategory();
+}
+
+/**
+ * create new Category
+ */
+function createNewCategory() {
+    let category = document.getElementById('new-category-input').value;
+    let error = document.getElementById('error-new_category');
+
+    if(category.length > 0){
+        if(selectedCategoryColor) {
+            let newCategory = {'name': category, 'color': selectedCategoryColor};
+            unselectCategoryColor();
+            clearNewCategory();
+
+            document.getElementById('select-category').innerHTML = selectedCategoryTemplate(category);
+            error.innerHTML = '';
+            renderCategoryDropdown();
+            selectedCategory = newCategory;
+        } else {
+            error.innerHTML = 'Select a Color for new Category';
+        }
+    }  else {
+        error.innerHTML = 'Name required';
+    } 
+}
+
+/**
+ * display selected Category Name and Color on select box
+ * @param {number} i - Category Array Index
+ */
+function selectCategory(i) {
+    selectedCategoryColor = categoryArray[i]['color'];
+    document.getElementById('select-category').innerHTML = selectedCategoryTemplate(categoryArray[i]['name']);
+
+    openDropdownCategory();
+    selectedCategory = {'name': categoryArray[i]['name'], 'color': selectedCategoryColor};
+}
+
+/**
+ * Template to display selected Category Name and Color on select box
+ * @param {string} category - Category Name
+ * @returns 
+ */
+function selectedCategoryTemplate(category) {
+    return `
+    &lt;div style="display: flex; align-items: center; gap: 10px;">
+        &lt;div class="category-color" style="background-color: ${selectedCategoryColor}">&lt;/div>
+        ${category}
+    &lt;/div>
+    &lt;img src="./assets/img/arrow-down.png" alt="arrow down">`;
+}
+
+/**
+ * change Color style (select and unselect) under Category Dropdown/Input
+ * @param {number} i - index of Category Array
+ */
+function selectCategoryColor(i) {
+    selectedCategoryColor = categoryArray[i]['color'];
+
+    unselectCategoryColor();
+    document.getElementById(`category-color-${i}`).classList.add('category-colors-selected');
+}
+
+/**
+ * remove border from Category Colors under Categroy input (5 Colors)
+ */
+function unselectCategoryColor() {
+    for (let i = 0; i &lt; 5; i++) {
+        document.getElementById(`category-color-${i}`).classList.remove('category-colors-selected');
+    }
+}
+
+/**
+ * click automaticly Accept Button in Inputbox after press Enter
+ * @param {*} event - Keyboard Event
+ */
+function colorInputEnter(event) {
+    if (event.key == "Enter") {
+        createNewCategory();
+    }
+}
+
+/**
+ * searched element in array['name']
+ * @param {string} searchTerm - searched element in array
+ * @param {array} array - array to searching element
+ * @returns 
+ */
+function searchIndexInArrayCategory(searchTerm, array) {
+    var index = array.findIndex(function(item, i){
+      return item.name === searchTerm
+    });
+    
+    return index; //Output Index or -1
+}
+
+/**
+ * add selected Category to DB, if it doesn't exist
+ */
+async function newCategoryPush() {
+    let categoryIndex = searchIndexInArrayCategory(selectedCategory['name'], categoryArray);
+    if(categoryIndex &lt; 0){
+        categoryIndex = categoryArray.length;
+        categoryArray.push(selectedCategory);
+        await addToDBCategory();
+    }
+    return categoryIndex;
+}
+
+// ========== ASSIGNED TO DROPDOWN BOX ==========
+/**
+ * render Assigned To Dropdown with Contact elements
+ */
+function renderAssignDropdown() {
+    let assignArea = document.getElementById('checkbox-assigned_to');
+    assignArea.innerHTML = '';
+
+    for (let i = 0; i &lt; usersArray.length; i++) {
+        let element;
+        if(usersArray[i]['firstname'] &amp;&amp; usersArray[i]['lastname']) {
+            element = usersArray[i]['firstname'] +' '+ usersArray[i]['lastname'];
+        } else {
+            element = usersArray[i]['email'];
+        }
+
+        assignArea.innerHTML += renderAssignDropdownTemplate(i, element);
+        if(searchIndexInArray(usersArray[i]['email'], assignToArray) >= 0) {
+            selectContact(i);
+        }
+    }
+}
+
+/**
+ * Template for Assign Dropdown
+ * @param {number} i - index 
+ * @param {string} element - Contact name or email
+ * @returns innerHTML
+ */
+function renderAssignDropdownTemplate(i, element) {
+    return `
+    &lt;div class="add-contact checkboxes-element" onclick="selectContact(${i})">
+        &lt;span class="assigned_to-element">${element}&lt;/span>
+        &lt;div id="assignCheckbox-${i}" class="assign-checkbox">&lt;/div>
+    &lt;/div>`;
+}
+
+/**
+ * create/remove check mark in checkbox and push/splice Contact to assignToArray
+ * @param {nr} i - index of checked in/out Contact
+ */
+function selectContact(i) {
+    let checkbox = document.getElementById(`assignCheckbox-${i}`);
+
+    if(checkbox.innerHTML.length > 0) {
+        checkbox.innerHTML = ''
+        let nrInAssignToArray = searchIndexInArray(usersArray[i]['email'], assignToArray);
+        assignToArray.splice(nrInAssignToArray, 1);
+    } else {
+        checkbox.innerHTML = '&lt;div class="assign-checkbox-selected">&lt;/div>';
+        if(searchIndexInArray(usersArray[i]['email'], assignToArray) &lt; 0) {
+            assignToArray.push(usersArray[i]['email']);
+        }
+    }
+    updateAssignedToHeadline();
+}
+
+/**
+ * show how many People Assigned to the Task
+ */
+function updateAssignedToHeadline() {
+    let txt = document.getElementById('assigned_to-headline');
+
+    if(assignToArray.length > 0) {
+        txt.innerHTML = `Assigned to ${assignToArray.length} people`;
+    } else {
+        txt.innerHTML = 'Select contacts to assign';
+    }
+}
+
+/**
+ * find Index of 'array' over email
+ * @param {string} searchTerm - email of searched Contact
+ * @param {array} array - searching in array 'array'
+ * @returns - found index
+ */
+function searchIndexInArray(searchTerm, array) {
+    var index = array.findIndex(function(item, i){
+      return item.email === searchTerm
+    });
+    
+    return index;
+}
+
+/**
+ * Expand 'Assigned To' Dropdown
+ */
+function showCheckboxesAssignedTo() {
+    if (!expandedAssignedTo) {
+        document.getElementById("checkboxes-assigned_to").classList.remove('d-none');
+        document.getElementById("checkboxes-assigned_to").style.animation = "extend 255ms linear forwards";
+        document.getElementById("select-assign_to").classList.add('selectBox-focus');
+        expandedAssignedTo = true;
+    } else {
+        closeDropdownAssignedTo();
+    }
+}
+
+/**
+ * Close 'Assigned to' Dropdown
+ */
+function closeDropdownAssignedTo() {
+    setTimeout(() => {
+        document.getElementById("checkboxes-assigned_to").classList.add('d-none');
+        document.getElementById("select-assign_to").classList.remove('selectBox-focus');
+    }, '255')
+    document.getElementById("checkboxes-assigned_to").style.animation = "collapse 255ms linear forwards";
+    expandedAssignedTo = false;
+}
+
+/**
+ * show 'invite new contact' input
+ */
+function addTaskInviteContact() {
+    document.getElementById('assign_to-container').classList.add('d-none');
+    document.getElementById('new-contact').classList.remove('d-none');
+}
+
+/**
+ * close 'invite new contact' input
+ */
+function clearInviteContact() {
+    document.getElementById('new-contact-input').value = '';
+    document.getElementById('error-invite_contact').innerHTML = '';
+    document.getElementById('error-invite_contact').classList.remove('error-container');
+
+    document.getElementById('assign_to-container').classList.remove('d-none');
+    document.getElementById('new-contact').classList.add('d-none');
+}
+
+/**
+ * invite new contact
+ */
+function sendInvite() {
+    let email = document.getElementById('new-contact-input').value;
+    let error = document.getElementById('error-invite_contact');
+    let verification = validateEmail(email);
+    
+    if(Boolean(verification) == true) {
+        sendInviteSuccessfully(email);
+    } else {
+        document.getElementById('error-invite_contact').classList.add('error-container');
+        error.innerHTML = 'Email is invalid';
+    }
+}
+
+/**
+ * push email to usersArray and assignToArray if not exist in Array.
+ * clear Contact input and render Assign Dropbox with (new) Contacts
+ * @param {string} email - email address
+ */
+function sendInviteSuccessfully(email) {
+    let emailContact = {'email': email};
+    let contactArrayIndex = searchIndexInArray(email, usersArray);
+
+        if(contactArrayIndex &lt; 0) {
+            usersArray.push(emailContact);
+            if(searchIndexInArray(email, assignToArray) &lt; 0) {
+                assignToArray.push(emailContact);
+                //send email
+            }
+        } else if(contactArrayIndex >= 0) {
+            if(searchIndexInArray(email, assignToArray) &lt; 0) {
+                assignToArray.push(usersArray[contactArrayIndex]);
+            }
+        }
+
+        clearInviteContact();
+        renderAssignDropdown();
+}
+
+/**
+ * validate Email syntax (name@domain.topLvlDomain)
+ * @param {string} email 
+ * @returns - boolean
+ */
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+/**
+ * click automaticly Accept Button in Inputbox after press Enter
+ * @param {*} event - Keyboard Event
+ */
+function inviteInputEnter(event) {
+    if (event.key == "Enter") {
+        sendInvite();
+    }
+}
+
+// ========== DUE DATE ==========
+/**
+ * set Due Date minimum to today
+ */
+function setDueDateMinToday() {
+    let today = new Date().toISOString().split("T")[0];
+    document.getElementById("due-date").min = today;
+}
+
+/**
+ * return Date if ok else display error
+ * @returns date
+ */
+function getDueDate() {
+    let date = document.getElementById('due-date').value;
+    let error = document.getElementById('error-due_date');
+
+    if(date){
+        if(date &lt; new Date().toISOString().split("T")[0]) {
+            error.innerHTML = 'Due date cannot be in the past';
+        } else {
+            error.innerHTML = '';
+            return date;
+        }
+    } /* else {
+        error.innerHTML = '&lt;span style="color: #e1b400;">Due date invalid or not set&lt;/span>';
+    } */
+}
+
+// ========== PRIO ==========
+/**
+ * unselect Prio Button and select klicked Prio, if not already selected
+ * @param {number} nr - 1=urgent, 2=medium, 3=low
+ */
+function setPrio(nr) {
+    let urgent = document.getElementById('prio-urgent');
+    let medium = document.getElementById('prio-medium');
+    let low = document.getElementById('prio-low');
+
+    let compare = compareWithOldSelection(nr);
+    clearPrioSelection(urgent, medium, low);
+
+    if(Boolean(compare) == false) {
+        showSelectedPrio(nr, urgent, medium, low);
+    } else {
+        nr = null;
+    }
+    
+    prio = nr;
+}
+
+/**
+ * compare selected Prio with selected Prio before
+ * @param {number} nr 
+ * @returns - Boolean: new (false) or same (true)
+ */
+function compareWithOldSelection(nr) {
+    let comparePrio;
+
+    switch (nr) {
+        case 1:
+            comparePrio = 'Urgent';
+            break;
+        case 2:
+            comparePrio = 'Medium';
+            break;
+        case 3:
+            comparePrio = 'Low'
+            break;
+    }
+
+    try {
+        return document.getElementsByClassName('prio-selected')[0].innerHTML.startsWith(comparePrio);
+    } catch {}
+}
+
+/**
+ * add Class on selected Prio
+ * @param {number} nr - Prio number
+ * @param {object} urgent - div container with Prio urgent content
+ * @param {object} medium - div container with Prio medium content
+ * @param {object} low - div container with Prio low content
+ */
+function showSelectedPrio(nr, urgent, medium, low) {
+    if(nr == 1) {
+        urgent.classList.add('prio-selected');
+        urgent.classList.add('prio-urgent');
+        urgent.classList.remove('prio-element');
+    } else if(nr == 2) {
+        medium.classList.add('prio-selected');
+        medium.classList.add('prio-medium');
+        medium.classList.remove('prio-element');
+    } else if (nr == 3) {
+        low.classList.add('prio-selected');
+        low.classList.add('prio-low');
+        low.classList.remove('prio-element');
+    }
+}
+
+/**
+ * remove Prio div selected Style
+ * @param {Object} urgent - div container with Prio urgent content
+ * @param {Object} medium - div container with Prio medium content
+ * @param {Object} low - div container with Prio low content
+ */
+function clearPrioSelection(urgent, medium, low) {
+    urgent.classList.remove('prio-selected');
+    urgent.classList.remove('prio-urgent');
+    urgent.classList.add('prio-element');
+
+    medium.classList.remove('prio-selected');
+    medium.classList.remove('prio-medium');
+    medium.classList.add('prio-element');
+
+    low.classList.remove('prio-selected');
+    low.classList.remove('prio-low');
+    low.classList.add('prio-element');
+}
+
+/**
+ * check if Title exist
+ * @returns - input of Title Input box
+ */
+function checkPrio() {
+    let error = document.getElementById('error-prio');
+
+    if(prio) {
+        error.innerHTML = '';
+    } else {
+        error.innerHTML = 'This field is required';
+    }
+}
+
+// ========== SUBTASKS ==========
+/**
+ * push input 'Add new subtask' to Array subtasks and render Subtasks under Input
+ */
+function sendNewSubtask() {
+    let newSubtask = document.getElementById('new-subtask');
+    let error = document.getElementById('error-subtasks');
+
+    if(newSubtask.value.length >= 2) {
+        let subtaskArray = {'name': newSubtask.value, 'complete': false};
+        subtasks.push(subtaskArray);
+        newSubtask.value = '';
+        error.innerHTML = '';
+        renderSubtasks();
+        closeSubtaskCheckmark();
+    } else {
+        error.innerHTML = 'Subtask need minimum 2 Letters';
+    }
+}
+
+/**
+ * clear Subtask Input and lose focus
+ */
+function clearNewSubtask() {
+    document.getElementById('new-subtask').value = '';
+    document.getElementById('error-subtasks').innerHTML = '';
+    closeSubtaskCheckmark();
+}
+
+/**
+ * focus Subtask Input after click
+ */
+function focusSubtaskInput() {
+    document.getElementById("subtask-add-btn").addEventListener("click", () => {
+        document.getElementById("new-subtask").focus();
+      });
+}
+
+/**
+ * hide Subtask Input check- and x-mark if input empty 
+ */
+function loseSubtaskFocus() {
+    if(document.getElementById('new-subtask').value.length &lt; 1) {
+        closeSubtaskCheckmark();
+    }
+}
+
+/**
+ * hidde add mark and show close- and checkmark in Subtask input
+ */
+function showSubtaskCheckmark() {
+    document.getElementById('subtask-add-btn').classList.add('d-none');
+    document.getElementById('subtask-clear-check-btn').classList.remove('d-none');
+}
+
+/**
+ * hidde close- and checkmark and show add mark in Subtask input
+ */
+function closeSubtaskCheckmark() {
+    document.getElementById('subtask-add-btn').classList.remove('d-none');
+    document.getElementById('subtask-clear-check-btn').classList.add('d-none');
+}
+
+/**
+ * render all subtasks
+ */
+function renderSubtasks() {
+    let subtaskContainer = document.getElementById('subtask-container');
+    subtaskContainer.innerHTML = '';
+
+    for(i=0; i &lt; subtasks.length; i++) {
+        renderSubtasksTemplate(subtaskContainer, i);
+        checkCheckboxValue(i);
+    }
+}
+
+/**
+ * Template to render Subtasks
+ * @param {Object} subtaskContainer - Element with Id 'subtask-container'
+ * @param {number} i - index of substrings
+ */
+function renderSubtasksTemplate(subtaskContainer, i) {
+    subtaskContainer.innerHTML += `
+    &lt;div class="subtask-element">
+        &lt;div class="subtask-name">
+            &lt;div id="subtask-checkbox-${i}" onclick="changeSubtaskCheckbox(${i})">&lt;/div>
+            &lt;span style="cursor: text">${subtasks[i]['name']}&lt;span>
+        &lt;/div>
+        &lt;div class="subtask-delete" onclick="deleteSubtask(${i})">
+            ✗
+        &lt;/div>
+    &lt;/div>`;
+}
+
+/**
+ * delete element 'i' in substrings (json)
+ * @param {number} i - index of substrings
+ */
+function deleteSubtask(i) {
+    subtasks.splice(i, 1);
+    renderSubtasks();
+}
+
+/**
+ * show/remove checked checkbox and add/remove complete on subtask
+ * @param {number} i - index of substrings
+ */
+function changeSubtaskCheckbox(i) {
+    if(Boolean(subtasks[i]['complete']) == false) {
+        subtasks[i]['complete'] = true;
+    } else {
+        subtasks[i]['complete'] = false;
+    }
+
+    checkCheckboxValue(i);
+}
+
+/**
+ * add/remove tick mark to substrings checkbox
+ * @param {number} i - index of substrings
+ */
+function checkCheckboxValue(i) {
+    let subtask = document.getElementById(`subtask-checkbox-${i}`);
+    
+    if(Boolean(subtasks[i]['complete']) == true) {
+        subtask.innerHTML = `
+        &lt;div class="subtask-checkbox-selected">&lt;img src="./assets/img/checkmark.png" alt="check mark">&lt;/div>`;
+    }else {
+        subtask.innerHTML = '';
+    }
+}
+
+/**
+ * click automaticly Accept Button in Inputbox after press Enter
+ * @param {*} event - Keyboard Event
+ */
+function newSubtaskInputClickPress(event) {
+    if (event.key == "Enter") {
+        document.getElementById("add-subtask-btn").click();
+    }
+}
+
+// ========== BUTTONS ==========
+function mouseoverClearTaskBtn() {
+    document.getElementById('clear-task-btn').classList.add('clear-task-btn');
+}
+
+function mouseleaveClearTaskBtn() {
+    document.getElementById('clear-task-btn').classList.remove('clear-task-btn');
+}
+
+// ========== CREATE TASK ==========
+/**
+ * show 'Task added' for 3 sec. and disable main container
+ */
+function createTaskMessage() {
+    disableBody();
+    disableMainContainer();
+   
+    document.getElementById('task_added').classList.remove('d-none');
+
+    setTimeout(() => {
+        window.location = ("./board.html");
+    }, '3000')
+}
+
+/**
+ * disable Body
+ */
+function disableBody() {
+    try {
+        let body = document.getElementById("body");
+    } catch {}
+
+    if(body) {
+        body.disabled = true;
+        var nodes = body.getElementsByTagName('*');
+
+        for(var i = 0; i &lt; nodes.length; i++){
+            nodes[i].disabled = true;
+        }
+    }
+}
+
+/**
+ * disable Main Container
+ */
+function disableMainContainer() {
+    let main = document.getElementById("add_task-main");
+    main.disabled = true;
+    var nodes = main.getElementsByTagName('*');
+
+    for(var i = 0; i &lt; nodes.length; i++){
+        nodes[i].disabled = true;
+    }
+
+    main.classList.add('no-events');
+}
+
+// ========== UNIVERSAL ==========
+/**
+ * include HTML function
+ */
+async function includeHTML() {
+    let includeElements = document.querySelectorAll('[w3-include-html]');
+    for (let i = 0; i &lt; includeElements.length; i++) {
+        const element = includeElements[i];
+        file = element.getAttribute('w3-include-html');
+        let resp = await fetch(file);
+        if(resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = 'Page not found.';
+        }
+    }
+}
+
+/**
+ * Close all Dropdowns
+ */
+function closeDropdown() {
+    closeDropdownCategory();
+    closeDropdownAssignedTo();
+}
+
+/**
+ * Stop Closing Dropdown Boxes on this Element
+ */
+function stopClosing() {
+    event.stopPropagation();
+}
+
+// ========== DATABASE ==========
+async function loadFromDB() {
+    await downloadFromServer();
+    usersArray = JSON.parse(backend.getItem('users')) || [];
+    categoryArray = JSON.parse(backend.getItem('categories')) || [];
+    taskArray = JSON.parse(backend.getItem('tasks')) || [];
+}
+
+async function addToDBCategory() {
+    await backend.setItem('categories', JSON.stringify(categoryArray));
+}
+
+async function addToDBTask(task) {
+    await backend.setItem('tasks', JSON.stringify(task));
+}
+
+/* async function addToDBUsers() {
+    await backend.setItem('users', JSON.stringify(usersArray));
+} */</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTaskInviteContact">addTaskInviteContact</a></li><li><a href="global.html#addTaskNewCategory">addTaskNewCategory</a></li><li><a href="global.html#categoryDropdownTemplate">categoryDropdownTemplate</a></li><li><a href="global.html#changeSubtaskCheckbox">changeSubtaskCheckbox</a></li><li><a href="global.html#checkCheckboxValue">checkCheckboxValue</a></li><li><a href="global.html#checkDescription">checkDescription</a></li><li><a href="global.html#checkPrio">checkPrio</a></li><li><a href="global.html#checkTitle">checkTitle</a></li><li><a href="global.html#clearInviteContact">clearInviteContact</a></li><li><a href="global.html#clearNewCategory">clearNewCategory</a></li><li><a href="global.html#clearNewSubtask">clearNewSubtask</a></li><li><a href="global.html#clearPrioSelection">clearPrioSelection</a></li><li><a href="global.html#closeDropdown">closeDropdown</a></li><li><a href="global.html#closeDropdownAssignedTo">closeDropdownAssignedTo</a></li><li><a href="global.html#closeDropdownCategory">closeDropdownCategory</a></li><li><a href="global.html#closeSubtaskCheckmark">closeSubtaskCheckmark</a></li><li><a href="global.html#colorInputEnter">colorInputEnter</a></li><li><a href="global.html#compareWithOldSelection">compareWithOldSelection</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskMessage">createTaskMessage</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#disableBody">disableBody</a></li><li><a href="global.html#disableMainContainer">disableMainContainer</a></li><li><a href="global.html#filterAwait">filterAwait</a></li><li><a href="global.html#filterDone">filterDone</a></li><li><a href="global.html#filterInput">filterInput</a></li><li><a href="global.html#filterProgress">filterProgress</a></li><li><a href="global.html#filterToDo">filterToDo</a></li><li><a href="global.html#focusSubtaskInput">focusSubtaskInput</a></li><li><a href="global.html#generateNav">generateNav</a></li><li><a href="global.html#getDueDate">getDueDate</a></li><li><a href="global.html#hover">hover</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#inviteInputEnter">inviteInputEnter</a></li><li><a href="global.html#isCurrentSite">isCurrentSite</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loseSubtaskFocus">loseSubtaskFocus</a></li><li><a href="global.html#newCategoryPush">newCategoryPush</a></li><li><a href="global.html#newSubtaskInputClickPress">newSubtaskInputClickPress</a></li><li><a href="global.html#openDropdownCategory">openDropdownCategory</a></li><li><a href="global.html#renderAssignDropdown">renderAssignDropdown</a></li><li><a href="global.html#renderAssignDropdownTemplate">renderAssignDropdownTemplate</a></li><li><a href="global.html#renderCategory">renderCategory</a></li><li><a href="global.html#renderCategoryColors">renderCategoryColors</a></li><li><a href="global.html#renderCategoryDropdown">renderCategoryDropdown</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderSubtasksTemplate">renderSubtasksTemplate</a></li><li><a href="global.html#requestPrioNumber">requestPrioNumber</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchIndexInArray">searchIndexInArray</a></li><li><a href="global.html#searchIndexInArrayCategory">searchIndexInArrayCategory</a></li><li><a href="global.html#searchIndexInArrayTasks">searchIndexInArrayTasks</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectCategoryColor">selectCategoryColor</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectedCategoryTemplate">selectedCategoryTemplate</a></li><li><a href="global.html#sendInvite">sendInvite</a></li><li><a href="global.html#sendInviteSuccessfully">sendInviteSuccessfully</a></li><li><a href="global.html#sendNewSubtask">sendNewSubtask</a></li><li><a href="global.html#sendTaskToDB">sendTaskToDB</a></li><li><a href="global.html#setDueDateMinToday">setDueDateMinToday</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#showCheckboxesAssignedTo">showCheckboxesAssignedTo</a></li><li><a href="global.html#showSelectedPrio">showSelectedPrio</a></li><li><a href="global.html#showSubtaskCheckmark">showSubtaskCheckmark</a></li><li><a href="global.html#stopClosing">stopClosing</a></li><li><a href="global.html#tooltip">tooltip</a></li><li><a href="global.html#unselectCategoryColor">unselectCategoryColor</a></li><li><a href="global.html#updateAssignedToHeadline">updateAssignedToHeadline</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#validateEmail">validateEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Feb 26 2023 18:54:21 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,869 @@
+body {
+    background-color: #f6f7f8;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 61px;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.content {
+  max-height: unset;
+  /* padding: 40px 60px 0 60px; */
+  padding: 171px 60px 0 355px;
+}
+
+#add_task-main {
+  font-family: 'Inter', sans-serif;
+  font-size: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* ============margin hinzugefügt===================== 
+  margin: 108px 14px 10px 107px; */
+}
+
+.add_task-content-container {
+  position: relative;
+  width: 965px;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.not-markable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.new_task-container {
+  width: 422px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error-container {
+  height: 25px;
+  padding-bottom: 9px;
+  color: red;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.no-events {
+  cursor: unset !important;
+  pointer-events: none !important;
+}
+
+.padding-right {
+  padding-right: 59px;
+  border-right: 2px solid #D1D1D1;
+}
+
+.padding-left {
+  padding-left: 59px;
+}
+
+.type-headline-container {
+  display: none;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== Input/Text Box ===== */
+.new_task-container input,
+textarea,
+select {
+    padding: 13px 21px 13px 21px;
+    font-size: 21px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.new_task-container input::placeholder,
+textarea::placeholder {
+    color: #D1D1D1;
+}
+
+.new_task-container input:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+.new_task-container input:focus::placeholder,
+textarea:focus::placeholder {
+    color: transparent;
+}
+
+#new_task-description {
+  height: 119px;
+  resize: none;
+}
+
+/* ===== Dropdown ===== 
+https://stackoverflow.com/questions/17714705/how-to-use-checkbox-inside-select-option */
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+}
+
+.selectBox-focus {
+  border-top: 1px solid #d1d1d1 !important;
+  border-bottom: 0 !important;
+  border-left: 1px solid #d1d1d1 !important;
+  border-right: 1px solid #d1d1d1 !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.checkboxes {
+  max-height: 0px;
+  overflow-y: auto;
+  transition: max-height 255ms ease-in;
+  border-left: 1px solid #d1d1d1;
+  border-right: 1px solid #d1d1d1;
+  border-bottom: 1px solid #d1d1d1;
+  background-color: white;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 99;
+}
+
+.expand {
+  max-height: 125px !important;
+}
+
+.dropdown-collapse {
+  border: 0;
+}
+
+.add_task-input {
+  padding: 0 21px 0 21px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.add_task-input input {
+  width: 100%;
+  padding: 13px 0 13px 0;
+  border: 0;
+}
+
+.add_task-input button {
+  height: 100%;
+  width: 35px;
+  font-size: 20px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  cursor: pointer;
+}
+
+.dropdown-select {
+  padding: 13px 21px 13px 21px;
+  font-size: 20px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-select img {
+  height: 8px;
+  width: 16px;
+}
+
+.checkboxes-element {
+  padding: 8px 21px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.checkboxes-element:hover {
+  background-color: #d1d1d1;
+}
+
+
+/* ===== Category Dropdown ===== */
+.container-3 {
+  width: 422px;
+  margin-bottom: -15px;
+  height: 200px;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.category-color {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+}
+
+.category-colors-container {
+  margin-left: 21px;
+  margin-bottom: -10px;
+  display: flex;
+  gap: 15px;
+}
+
+.category-colors-container div {
+  height: 20px;
+  width: 20px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.category-colors-container div:hover {
+  filter: saturate(120%);
+  transform: scale(1.1);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
+}
+
+.category-colors-selected {
+  border: 2px solid black !important;
+  filter: saturate(120%);
+  transform: scale(1.1);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
+}
+
+#error-new_category {
+  margin-top: -10;
+}
+
+/* ===== Assigned To Dropdown ===== */
+.assigned_to-element input {
+    height: 15px;
+    width: 15px;
+}
+
+.add-contact {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-contact img {
+  height: 20px;
+  width: 20px;
+}
+
+.assign-checkbox {
+  height: 15px;
+  width: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.assign-checkbox-selected {
+  height: 9px;
+  width: 9px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+/* ===== DUE TIME ===== */
+#due-date {
+  height: 23px;
+  cursor: pointer;
+}
+
+/* ===== Prio ===== */
+.prio-selection {
+  display: flex;
+  gap: 10px;
+}
+
+.prio-selection div {
+  height: 51px;
+  width: 136px;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #0000001A;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.prio-element:hover {
+  filter: saturate(120%);
+  transform: scale(1.1);
+  box-shadow: 0px 6px 4px rgb(0 0 0 / 10%);
+}
+
+.prio-selected {
+  box-shadow: 0px 6px 4px rgb(0 0 0 / 10%) !important;
+  color: white;
+}
+
+.prio-selected img {
+  filter: brightness(0) invert(1);
+}
+
+.prio-urgent {
+  background-color: #ff3d00 !important;
+}
+
+.prio-medium {
+  background-color: #ffa800 !important;
+}
+
+.prio-low {
+  background-color: #7ae229 !important;
+}
+
+/* ===== Subtask ===== */
+.container-4 {
+  margin-top: -94px;
+}
+
+.subtask-input {
+  padding: 0 21px 0 21px;
+  font-size: 20px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+#subtask-add-btn button {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#subtask-container {
+  height: 178px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+#subtask-clear-check-btn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.subtask-element {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.subtask-name {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.subtask-name div {
+  height: 16px;
+  width: 16px;
+
+  border: 1px solid #000000;
+  border-radius: 3px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.subtask-checkbox-selected {
+  padding-left: 4px;
+  padding-bottom: 7px;
+  font-size: 21px;
+  border: 0 !important;
+}
+
+.subtask-checkbox-selected img {
+  height: 15px;
+  width: 13px;
+}
+
+.subtask-delete {
+  width: 20px;
+  border: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ===== Buttons ===== */
+.add_task-btn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+}
+
+.add_task-btn button{
+  height: 61px;
+  padding: 18px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add_task-btn button:hover {
+  filter: saturate(105%);
+  transform: scale(1.01);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
+}
+
+.add_task-btn span {
+  font-size: 21px;
+}
+
+.clear-task {
+  background-color: transparent;
+  border: 1px solid #2A3647;
+  cursor: pointer;
+}
+
+.clear-task:hover {
+  color: #29abe2;
+  border: 1px solid #29abe2;
+  transition: 255ms;
+}
+
+.clear-task-btn {
+  filter: invert(45%) sepia(100%) saturate(327%) hue-rotate(152deg) brightness(107%) contrast(103%);
+  transition: 255ms;
+}
+
+.create-task {
+  color: white;
+  background-color: #2a3647;
+  font-weight: bold;
+  border: 0;
+  cursor: pointer;
+}
+
+.create-task img {
+  filter: invert(1);
+}
+
+.create-task:hover {
+  background-color: #29abe2;
+  transition: 255ms;
+}
+
+.create-task-mobile {
+  position: fixed;
+  top: 9px;
+  right: 25px;
+  height: 58px;
+  width: 124px;
+  padding: 18px 10px;
+  border-radius: 10px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 99;
+}
+
+.create-task-mobile:hover {
+  filter: saturate(105%);
+  transform: scale(1.01);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
+}
+
+/* ===== Added Task Message ===== */
+#task_added {
+  position: absolute;
+  /* bottom: 30%;
+  left: 50%; */
+  height: 32px;
+  width: 253px;
+  padding: 18px;
+  border-radius: 10px;
+  border: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 21px;
+  color: white;
+  background-color: #2a3647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+#task_added img {
+  height: 25px;
+}
+
+/* ===== MEDIA SIZE ===== */
+@media (max-height: 1010px) {
+  .content {
+    padding: 110px 60px 0 355px;
+  }
+}
+
+@media (max-height: 950px) {
+  h1 {
+    font-size: 54px;
+  }
+
+  .content {
+    padding: 90px 60px 0 355px;
+  }
+}
+
+@media (max-width: 1380px) or (max-height:922px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  span {
+    font-size: 18px;
+  }
+  
+  .add_task-content-container {
+    width: 820px;
+  }
+
+  #add_task-main {
+    font-size: 18px;
+  }
+
+  .new_task-container {
+    width: 350px;
+  }
+
+  .new_task-container input, textarea, select {
+    font-size: 18px;
+  }
+
+  .dropdown-select {
+    font-size: 18px;
+  }
+
+  .prio-selection {
+    justify-content: space-between;
+    gap: unset;
+  }
+
+  .prio-selection div {
+    height: 45px;
+    width: 105px;
+    justify-content: space-evenly;
+    gap: unset;
+  }
+
+  .add_task-btn button {
+    height: unset;
+    /* padding: 8px 8px; */
+  }
+
+  .add_task-btn span{
+    font-size: 18px;
+  }
+
+  .container-3 {
+    width: 350px;
+  }
+}
+
+@media (max-width: 1235px) or (max-height:892px) {
+  h1 {
+    font-size: 47px;
+    margin-top: 19px;
+    margin-bottom: 23px;
+  }
+
+  span {
+    font-size: 16px;
+  }
+
+  #add_task-main {
+    font-size: 16px;
+  }
+
+  .new_task-container input, textarea, select {
+    font-size: 16px;
+  }
+
+  .dropdown-select {
+    font-size: 16px;
+  }
+
+  #new_task-description {
+    height: 90px;
+  }
+
+  #add_task-main {
+    font-size: 16px;
+  }
+
+  .container-4 {
+    margin-top: -70px;
+  }
+}
+
+@media (max-width: 1235px) {
+  .padding-right {
+    padding-right: 39px;
+  }
+
+  .padding-left {
+    padding-left: 39px;
+  }
+
+  .add_task-content-container {
+    width: 730px;
+  }
+
+  .new_task-container {
+    width: 325px;
+  }
+
+  .container-3 {
+    width: 325px;
+  }
+  
+}
+
+@media (max-width: 1145px) {
+  .new_task-container {
+    width: 260px;
+  }
+
+  .container-3 {
+    width: 260px;
+  }
+
+  .prio-selection div {
+    width: 78px;
+    font-size: 14px;
+  }
+}
+
+
+/* 1145px */
+@media (max-width: 1014px) or (max-height:850px) {
+  #add_task-main {
+    padding-bottom: 60px!important;
+  }
+  .content {
+    padding: 70px 0 0 30%;
+  }
+
+  .padding-right {
+    border: 0;
+    padding: 0;
+  }
+
+  .padding-left {
+    padding: 0;
+  }
+  
+  .add_task-content-container {
+    width: 363px;
+  }
+
+  .type-headline-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .type-headline {
+    width: 363px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-wrap: unset;
+    flex-direction: column;
+  }
+
+  .container-2 {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .prio-selection div {
+    width: 115px;
+    font-size: 16px;
+  }
+
+  .new_task-container {
+    width: 363px;
+  }
+
+  .new_task-container input, textarea, select {
+    padding: 11px 21px;
+  }
+
+  #new_task-description {
+    height: 93px;
+  }
+  
+  .error-container {
+    height: 9px;
+    padding: 0;
+    justify-content: flex-end;
+  }
+
+  .absolute {
+    position: unset;
+  }
+
+  #error-invite_contact {
+    height: 9px;
+    padding: 0;
+    justify-content: flex-end;
+  }
+
+  .container-4 {
+    margin: 14px 0 0 0;
+  }
+
+  #subtask-container {
+    margin: 0;
+  }
+
+  .add_task-btn {
+    display: none;
+  }
+
+  .create-task-mobile {
+    display: flex;
+  }
+  .container-3 {
+    height: auto;
+  }
+}
+
+@media (max-width: 785px) {
+  .content {
+    padding: 70px 0 0 38%;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 70px 0 0 0;
+  }
+}
+
+@media (max-width: 425px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  span {
+    font-size: 14px;
+}
+
+  .content {
+    padding: 70px 0 0 19%;
+  }
+
+  .new_task-container {
+    width: 280px;
+  }
+
+  .new_task-container input, textarea, select {
+    font-size: 14px;
+  }
+
+  .dropdown-select {
+    font-size: 14px;
+  }
+
+  .prio-selection div {
+    width: 78px;
+    font-size: 14px;
+  }
+  .subtask-element {
+    width: 81%;
+  }
+}
+
+@media (max-width: 375px) {
+  .content {
+    padding: 70px 0 0 14%;
+  }
+  .subtask-element {
+    width: 86%;
+  }
+}
+
+@media (max-width: 320px) {
+  .content {
+    padding: 70px 0 0 6%;
+  }
+  .subtask-element {
+    width: 92%;
+  }
+}
+
+@media (max-width: 280px) {
+  .content {
+    padding: 70px 0 0 5%;
+  }
+
+  .new_task-container {
+    width: 250px;
+  }
+}

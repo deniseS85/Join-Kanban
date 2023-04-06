@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/board.css">
+    <script src="scripts/script.js"></script>
+    <script src="scripts/board.js"></script>
+    <title>Board</title>
+</head>
+<body>
+
+    <div w3-include-html="assets/templates/desktop_template.html"></div>
+
+    <div class="content">
+        <div class="help-content">
+            <div class="header-help">
+                <div class="title">Help</div>
+                <img onclick="history.back()" src="assets/img/arrow-right.png">
+            </div>
+            <div class="subtitle">What is Join?</div>
+            <p>Join is an agile project management tool designed to help visualize work, limit work-in-progress, and maximize efficiency (or flow). It can help both agile and DevOps teams establish order in their daily work. Join use drag and drop cards, columns, and continuous improvement to help technology and service teams commit to the right amount of work, and get it done!</p>
+
+            <div class="subtitle">How do use it?</div>
+
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>Use Join to map all the stages of your work process. When looking at the board, you should be able to understand how work is processed. Start with a basic board structure and split it into a few primary sections that show different work stages.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Is a perfect tool for visualizing potential problems in your process. The logic is simple: if you see a column in which tasks arrive faster than they leave, work will start to pile up, and the problem will become visible to the whole team. This may be caused by a temporary issue or a bottleneck in your process. </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Add new tasks and assign them to specific people. These tasks are visually displayed in cards and you can drag and drop the cards into different work steps depending on the process.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div w3-include-html="assets/templates/mobile_template.html"></div>
+</body>
+</html>

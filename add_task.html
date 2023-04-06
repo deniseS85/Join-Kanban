@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/add_task.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/script.js"></script>
+    <script src="./scripts/add_task.js"></script>
+    <script src="./scripts/add_task-check.js"></script>
+    <script src="./scripts/add_task-render.js"></script>
+    <script src="./smallest_backend_ever/mini_backend.js"></script>
+
+</head>
+
+<body id="body" onload="init()">
+
+    <div w3-include-html="assets/templates/desktop_template.html"></div>
+
+    <div class="content" onclick="closeDropdown(); "> <!-- clearNewCategory() -->
+        <div class="type-headline-container">
+            <span class="type-headline">Kanban Project Management Tool</span>
+        </div>
+        <div class="template-add-task" w3-include-html="assets/templates/add_task_template.html"></div>
+
+    </div> 
+
+    <div w3-include-html="assets/templates/mobile_template.html"></div>
+
+</body>
+
+</html>

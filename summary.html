@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/summary.css">
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <script src="./smallest_backend_ever/mini_backend.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/summary.js"></script>
+    <title>Summary</title>
+</head>
+
+<body onload="initSummary()">
+
+    <div w3-include-html="assets/templates/desktop_template.html"></div>
+
+    <div id="summary-content" onclick="closeToolTip(this)">
+        <div class="d-flex margin-left-100">
+            <div id="summaryContent" class="summary-content">
+
+                <div class="summary-header d-flex align-center gap">
+                    <div class="subheader-of-summary">Kanban Project Management Tool</div>
+                    <h1 class="font header-summary">Summary</h1>
+                    <img class="mobile-strich" src="assets/img/Vector5.png"/>
+                    <div class="strich">|</div>
+                    <div class="header-description">Everything in a nutshell!</div>
+                </div>
+
+                <div class="d-flex gap margin-top mobileMarginS">
+                    <div class="d-flex column center gap small-box-design" onclick="window.location.href='board.html'">
+                        <div id="taskLength" class="numbers"></div>
+                        <div class="underline-text">Task in Board</div>
+                    </div>
+                    <div class="d-flex column center gap small-box-design" onclick="window.location.href='board.html'">
+                        <div id="progressLength" class="numbers"></div>
+                        <div class="underline-text">Tasks In Progress</div>
+                    </div>
+                    <div class="d-flex column center gap small-box-design" onclick="window.location.href='board.html'">
+                        <div id="awaitLength" class="numbers"></div>
+                        <div class="underline-text">Awaiting Feeback</div>
+                    </div>
+                </div>
+
+                <div class="d-flex big-box-design gap margin-top mobileMarginS" onclick="window.location.href='board.html'">
+                    <div class="urgents-section">
+                        <img class="symbol" src="assets/img/urgent-symbol.png"/>
+                        <div class="d-flex column center margin-left1 newMargin">
+                            <div id="prioLength" class="numbers"></div>
+                            <div class="underline-text">Urgent</div> 
+                        </div>
+                    </div>
+                    <div class="strich2 margin-left3"></div>
+                    <div class="d-flex column center margin-left3 upcoming-deadline">
+                        <div id="prioUrgent" class="date width"></div>
+                        <div class="underline-text2">Upcoming Deadline</div>
+                    </div>
+                </div>
+
+                <div class="d-flex last-box">
+                    <div class="d-flex medium-box-design margin-top mobileMarginS" onclick="window.location.href='board.html'">
+                        <div class="other-sections otherSection1">
+                            <img class="symbol-background" src="assets/img/pencil.png"/>
+                            <div class="d-flex column center margin-left2 newMargin">
+                                <div id="todoLength" class="numbers"></div>
+                                <div class="underline-text">To-do</div>
+                            </div>
+                        </div>
+                    </div>
+                <div>
+
+                <div class="d-flex medium-box-design margin-top margin-left1 mobileMarginS" onclick="window.location.href='board.html'">
+                    <div class="other-sections otherSection2">
+                        <img class="symbol-background" src="assets/img/check.png"/>
+                        <div class="d-flex column center margin-left2 newMargin">
+                            <div id="doneLength" class="numbers"></div>
+                            <div class="underline-text">Done</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div> 
+        <div id="greeting" class="d-flex column greeting">
+            <div id="currentTime" class="greeting"></div>
+            <div id="userNameLogin" class="user-name"></div>
+        </div>
+        </div>
+    </div>
+
+    <div w3-include-html="assets/templates/mobile_template.html"></div>
+    
+</body>
+</html>

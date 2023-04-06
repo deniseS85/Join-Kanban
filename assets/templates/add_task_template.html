@@ -1,0 +1,165 @@
+<div class="header-add-task-resonsiv">
+    <div class="headline">Kanban Project Management Tool</div>
+    <a href="summary.html">
+        <img class="headline-img" src="assets/img/logo-black.png">
+    </a> 
+</div>
+
+<div id="add_task-main" onclick="closeToolTip(this)">
+    <div class="add_task-content-container">
+        <div class="header-task-overlay">
+            <h1>Add Task</h1>
+            <img id="closeAddTask" style="display: none;" onclick="closePopUpAddTask()" src=assets/img/close.png>
+        </div>
+        <div class="form-container">
+            <!-- ========== CONTAINER 1 (left-top / first in row) ========== -->
+            <div class="padding-right">
+                <!-- ========== TITLE INPUTFIELD ========== -->
+                <div class="new_task-container">
+                    <span>Title</span>
+                    <input id="new_task-title" type="text" required placeholder="Enter a title" onfocusout="checkTitle()">
+                </div>
+                <div id="error-title" class="error-container"></div>
+                <!-- ========== DESCRIPTION TEXTAREA ========== -->
+                <div class="new_task-container">
+                    <span>Description</span>
+                    <textarea id="new_task-description" maxlength="128" required placeholder="Enter a Description" rows="3" cols="55" onfocusout="checkDescription()"></textarea>
+                </div>
+                <div id="error-description" class="error-container"></div>
+            </div>
+
+            <!-- ========== CONTAINER 2 (right-top / second in row) ========== -->
+            <div class="container-2 padding-left">
+                <!-- ===== Due date ===== -->
+                <div>
+                    <div class="new_task-container">
+                        <span>Due date</span>
+                        <input id="due-date" type="date" value="" onfocusout="getDueDate()" class="not-markable">
+                    </div>
+                    <div id="error-due_date" class="error-container"></div>
+                </div>
+                <!-- ===== Prio ===== -->
+                <div>
+                    <div class="new_task-container">
+                        <span>Prio</span>
+                        <div class="prio-selection">
+                            <div id="prio-urgent" class="prio-element not-markable" onclick="setPrio(1)">Urgent <img src="./assets/img/arrow-top_orange.png" alt="arrow top" class="not-markable"></div>
+                            <div id="prio-medium" class="prio-element not-markable" onclick="setPrio(2)">Medium <img src="./assets/img/equal_orange.png" alt="equal sign" class="not-markable"></div>
+                            <div id="prio-low" class="prio-element not-markable" onclick="setPrio(3)">Low <img src="./assets/img/arrow-down_green.png" alt="arrow down" class="not-markable"></div>
+                        </div>
+                    </div>
+                    <div id="error-prio" class="error-container"></div>
+                </div>
+            </div>
+
+            <!-- ========== CONTAINER 3 (left-bottom / third in row) ========== -->
+            <div class="container-3 padding-right">
+                <div class="absolute"> <!-- style="position: absolute;" -->
+                    <!-- ========== CATEGORY DROPDOWN ========== -->
+                    <div class="new_task-container">
+                        <span>Category</span>
+                        <div id="category-container" onclick="stopClosing()">
+                            <div class="selectBox" onclick="openDropdownCategory(); stopClosing(); closeDropdownAssignedTo()">
+                                <div id="select-category" class="dropdown-select not-markable">
+                                    Select task Category
+                                    <img src="./assets/img/arrow-down.png" alt="arrow down" class="not-markable">
+                                </div>
+                                <div class="overSelect"></div>
+                            </div>
+                            <div id="checkboxes-category" class="checkboxes dropdown-collapse">
+                                <div class="checkboxes-element add-contact" style="justify-content: unset;" onclick="addTaskNewCategory()">
+                                    <img src="./assets/img/add-task-icon.png" alt="add">
+                                    New Category
+                                </div>
+                                <!-- vvvvv JS fill with categories vvvvv -->
+                                <div id="checkbox-category" class="checkboxes-container"></div>
+                            </div>
+                        </div>
+                        <!-- ===== New Category ===== -->
+                        <div id="new-category" class="add_task-input d-none" onclick="stopClosing()"> <!-- d-none -->
+                            <input id="new-category-input" type="text" placeholder="Category Name" onkeypress="colorInputEnter(event)">
+                            <button type="button" onclick="clearNewCategory()" class="not-markable"><img src="./assets/img/x-mark.png" alt="x mark"></button>
+                            <span style="color: #d1d1d1" class="not-markable">|</span>
+                            <button type="button" onclick="createNewCategory()" class="not-markable"><img src="./assets/img/checkmark.png" alt="check mark"></button>
+                        </div>
+
+                        <div id="category-color" class="category-colors-container d-none" onclick="stopClosing()"></div>
+                        <div id="error-new_category" class="error-container"></div>
+                    </div>
+                    <!-- ========== ASSIGNED TO DROPDOWN ========== -->
+                    <div class="new_task-container">
+                        <span>Assigned to</span>
+                        <div id="assign_to-container" onclick="stopClosing()">
+                            <div class="selectBox" onclick="showCheckboxesAssignedTo(); stopClosing(); closeDropdownCategory(); "> <!-- clearNewCategory() -->
+                                <div id="select-assign_to" class="dropdown-select not-markable">
+                                    <span id="assigned_to-headline">Select contacts to assign</span>
+                                    <img src="./assets/img/arrow-down.png" alt="arrow down" class="not-markable">
+                                </div>
+                                <div class="overSelect"></div>
+                            </div>
+                            <div id="checkboxes-assigned_to" class="checkboxes dropdown-collapse">
+                                <!-- vvvvv JS fill with contacts vvvvv -->
+                                <div id="checkbox-assigned_to" class="checkboxes-container"></div>
+
+                                <div class="assigned_to-element checkboxes-element add-contact not-markable" onclick="addTaskInviteContact()">
+                                    Invite new Contact
+                                    <img src="./assets/img/contact.png" alt="contact">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ===== New Contact ===== -->
+                        <div id="new-contact" class="add_task-input d-none">
+                            <input id="new-contact-input" type="email" placeholder="Contact email" onkeypress="inviteInputEnter(event)">
+                            <button type="button" onclick="clearInviteContact()"><img src="./assets/img/x-mark.png" alt="x mark" class="not-markable"></button>
+                            <span style="color: #d1d1d1" class="not-markable">|</span>
+                            <button onclick="sendInvite()" type="button"><img src="./assets/img/checkmark.png" alt="check mark" class="not-markable"></button>
+                        </div>              <!-- error-container -->
+                        <div id="error-invite_contact" class="" style="padding: 0;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== CONTAINER 4 (right-bottom / last in row) ========== -->
+            <div class="container-4 padding-left">
+                <!-- ===== new Subtask ===== -->
+                <div class="new_task-container">
+                    <span>Subtask</span>
+                    <div class="add_task-input not-markable">
+                        <input id="new-subtask" type="text" placeholder="Add new subtask" onfocus="showSubtaskCheckmark()" onfocusout="loseSubtaskFocus()" onkeypress="newSubtaskInputClickPress(event)">
+                        <div id="subtask-add-btn">
+                            <button type="button" onclick="focusSubtaskInput()"><img src="./assets/img/add.png" alt="add"></button>
+                        </div>
+                        <div id="subtask-clear-check-btn" class="d-none">
+                            <button type="button" onclick="clearNewSubtask()"><img src="./assets/img/x-mark.png" alt="x mark"></button>
+                            <span style="color: #d1d1d1">|</span>
+                            <button id="add-subtask-btn" type="button" onclick="sendNewSubtask()"><img src="./assets/img/checkmark.png" alt="check mark"></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="error-subtasks" class="error-container"></div>
+                <!-- ===== Subtask ===== -->
+                <div id="subtask-container" style="max-height: 0px"></div>
+            </div>
+        </div>
+        <!-- ===== Buttons Browser ===== -->
+        <div class="add_task-btn not-markable">
+            <button class="clear-task" onmouseover="mouseoverClearTaskBtn()" onmouseleave="mouseleaveClearTaskBtn()" onclick="clearTasks()">
+                <span>Clear</span><img id="clear-task-btn" src="./assets/img/x-mark.png" alt="x mark">
+            </button>
+
+            <button class="create-task" onclick="createTask()">
+                <span>Create Task</span><img src="./assets/img/checkmark.png" alt="check mark">
+            </button>
+        </div>
+
+        <!-- ===== Button Mobile ===== -->
+        <button class="create-task-mobile create-task" id="create-board-mobile" onclick="createTask()">
+            <span>Create</span><img src="./assets/img/checkmark.png" alt="check mark">
+        </button>
+
+    </div>
+</div>
+<div id="task_added" class="d-none">
+    <span>Task added to board</span>
+    <img src="assets/img/board.png" alt="">
+</div>

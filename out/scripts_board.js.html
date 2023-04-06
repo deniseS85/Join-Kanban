@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/board.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/board.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let currentDraggedElement;
+let tasks = [];
+let currentDate;
+
+async function initBoard() {
+    await includeHTML();
+    await loadTasks(); 
+    await loadCategory(); 
+    updateHTML();
+}
+
+async function loadTasks() {
+    let url = `../database/tasks.json`;
+    let response = await fetch(url);
+    tasks = await response.json();
+}
+
+async function loadCategory() {
+    let url = `../database/category.json`;
+    let response = await fetch(url);
+    categoryArray = await response.json();
+    renderCategoryDropdown();
+    renderCategoryColors();
+}
+
+
+/**
+ * Update Drag und Drop Elements
+ */
+function updateHTML() {
+    filterToDo();
+    filterProgress();
+    filterAwait();
+    filterDone();
+}
+
+/**
+ * All ToDo Elements are filtered with content
+ */
+function filterToDo() {
+    let todos = tasks.filter(t => t['status'] == 'ToDo');
+    document.getElementById('ToDo').innerHTML = '';
+
+    for (let i = 0; i &lt; todos.length; i++) {
+        let element = todos[i];
+        let prio = element['prio'];
+        let prioImg = requestPrioNumber(prio);
+        let prioOverlayImg = requestPrioOverlay(prio);
+        let subTask = element['subtask'];
+        let subTaskDone = subTask.filter(s =>s['complete'] == true);
+        let percent = (subTaskDone.length/subTask.length) * 100;
+        let category = element['category'];
+        let date = element['due_date'];
+
+        document.getElementById('ToDo').innerHTML += generateTasks(category, element, subTask, subTaskDone, percent, prioImg, date, prioOverlayImg, prio);
+    }
+}
+
+/**
+ * All Progress Elements are filtered with content
+ */
+function filterProgress() {
+    let progress = tasks.filter(t => t['status'] == 'progress');
+    document.getElementById('progress').innerHTML = '';
+
+    for (let i = 0; i &lt; progress.length; i++) {
+        let element = progress[i];
+        let prio = element['prio'];
+        let prioImg = requestPrioNumber(prio);
+        let prioOverlayImg = requestPrioOverlay(prio);
+        let subTask = element['subtask'];
+        let subTaskDone = subTask.filter(s =>s['complete'] == true);
+        let percent = (subTaskDone.length/subTask.length) * 100;
+        let category = element['category'];
+        let date = element['due_date'];
+
+        document.getElementById('progress').innerHTML += generateTasks(category, element, subTask, subTaskDone, percent, prioImg, date, prioOverlayImg, prio);
+    }  
+}
+
+/**
+ * All Await Elements are filtered with content
+ */
+function filterAwait() {
+    let wait = tasks.filter(t => t['status'] == 'await');
+    document.getElementById('await').innerHTML = '';
+
+    for (let i = 0; i &lt; wait.length; i++) {
+        let element = wait[i];
+        let prio = element['prio'];
+        let prioImg = requestPrioNumber(prio);
+        let prioOverlayImg = requestPrioOverlay(prio);
+        let subTask = element['subtask'];
+        let subTaskDone = subTask.filter(s =>s['complete'] == true);
+        let percent = (subTaskDone.length/subTask.length) * 100;
+        let category = element['category'];
+        let date = element['due_date'];
+      
+        document.getElementById('await').innerHTML += generateTasks(category, element, subTask, subTaskDone, percent, prioImg, date, prioOverlayImg, prio);
+    }
+    
+}
+
+/**
+ * All Done Elements are filtered with content
+ */
+function filterDone() {
+    let done = tasks.filter(t => t['status'] == 'done');
+    document.getElementById('done').innerHTML = '';
+
+    for (let i = 0; i &lt; done.length; i++) {
+        let element = done[i];
+        let prio = element['prio'];
+        let prioImg = requestPrioNumber(prio);
+        let prioOverlayImg = requestPrioOverlay(prio);
+        let subTask = element['subtask'];
+        let subTaskDone = subTask.filter(s =>s['complete'] == true);
+        let percent = (subTaskDone.length/subTask.length) * 100;
+        let category = element['category'];
+        let date = element['due_date'];
+       
+        document.getElementById('done').innerHTML += generateTasks(category, element, subTask, subTaskDone, percent, prioImg, date, prioOverlayImg, prio);
+    }
+}
+
+/**
+ * request the number of prio and get this image (1=urgent, 2=medium, 3=low)
+ * 
+ * @param {number} prio value of "prio" 1,2 or 3
+ * @returns images depending of the value
+ */
+function requestPrioNumber(prio) {
+    if (prio == 1) {
+        return `src="assets/img/urgent.png"`;
+    } else if (prio == 2) {
+        return `src="assets/img/medium.png"`;
+    } else if (prio == 3) {
+        return `src="assets/img/low.png"`;
+    }
+}
+
+function requestPrioOverlay(prio) {
+    if (prio == 1) {
+        return `src="assets/img/urgent-overlay.png"`;
+    } else if (prio == 2) {
+        return `src="assets/img/medium-overlay.png"`;
+    } else if (prio == 3) {
+        return `src="assets/img/low-overlay.png"`;
+    } 
+}
+
+
+function isCurrentPrio(currentPrio, staticPrio) {
+    if (currentPrio == staticPrio) {
+        return 'selected';
+    } else {
+        return "";
+    }
+}
+
+function requestPrioEditOverlay(el, prio) {
+    // deselect all prio elements
+    el.closest('.prio-edit-overlay').querySelector('.edit-urgent').classList.remove("selected");
+    el.closest('.prio-edit-overlay').querySelector('.edit-medium').classList.remove("selected");
+    el.closest('.prio-edit-overlay').querySelector('.edit-low').classList.remove("selected");
+
+    // select only current prio element
+    if (prio == 1) {
+        el.closest('.prio-edit-overlay').querySelector('.edit-urgent').classList.add("selected");
+    } else if (prio == 2) {
+        el.closest('.prio-edit-overlay').querySelector('.edit-medium').classList.add("selected");
+    } else if (prio == 3) {
+        el.closest('.prio-edit-overlay').querySelector('.edit-low').classList.add("selected");
+    }
+}
+
+function IsSubTask(subTaskDone, subTask) {
+    if (subTaskDone.length == 0 &amp;&amp; subTask.length == 0) {
+      return `style="visibility:hidden"`;
+    } 
+}
+
+
+
+function openPopUp(el) {
+    el.closest('.card').querySelector('.popUpCardBackground').style.display = 'flex';
+    el.closest('.card').querySelector('.popup-card-content').style.display = 'flex';
+    el.closest('.card').querySelector('.editOverlay').style.display = 'none';
+    document.getElementById('body').style.overflowY = 'hidden';
+}
+
+function openEditPopUp(el) {
+    el.closest('.card').querySelector('.popup-card-content').style.display = 'none';
+    el.closest('.card').querySelector('.editOverlay').style.display = 'flex';
+}
+
+function closePopUp(el) {
+    el.closest('.card').querySelector('.editOverlay').style.display = 'none';
+    el.closest('.card').querySelector('.popup-card-content').style.display = 'none';
+    el.closest('.card').querySelector('.popUpCardBackground').style.display = 'none';
+    document.getElementById('body').style.overflowY = '';
+}
+
+function overlayAddTask() {
+   document.getElementById('task-overlay').style.display = 'flex';
+   document.getElementById('closeAddTask').style.display = 'flex';
+   document.getElementById('body').style.overflowY = 'hidden';
+}
+
+
+// ================== Drag &amp; Drop ================== //
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(ev) {
+    currentDraggedElement = ev.target; /* currenDraggedElement = drag Element  */
+    currentDraggedElement.classList.add('drag-animation');
+}
+
+function drop(ev) { 
+    ev.target.closest('.cardContainer').appendChild(currentDraggedElement); /* currenDraggedElement = drop Element */
+    currentDraggedElement.classList.remove('drag-animation');
+}
+// ================================================ //
+
+/**
+ * Inputvalues are filtered by letters. Only cards with this letters are displayed
+ */
+function filterInput() {
+    let input = document.getElementById('input').value.toLowerCase();
+    let content = document.getElementById('cards');
+    let cards = content.querySelectorAll('.card');
+
+    for (let i = 0; i &lt; cards.length; i++) {
+        let title = cards[i].querySelector('.card-title').innerHTML;
+        let notice = cards[i].querySelector('.card-notice').innerHTML;
+
+        if (title.toLowerCase().substring(0, input.length) == input || notice.toLowerCase().substring(0, input.length) == input) {
+            cards[i].style.display = 'flex';
+        } else {
+            cards[i].style.display = 'none';
+        }
+    } 
+}
+
+/**
+ * change image by hover
+ * 
+ * @param {this} element this is the image that is being changed
+ */
+function hover(element) {
+    element.setAttribute('src', 'assets/img/addBlue.png');
+}
+  
+function unhover(element) {
+    element.setAttribute('src', 'assets/img/add-task-icon.png');
+}
+
+
+function doNotCloseOverlay(event) {
+    event.stopPropagation();
+}
+
+function dateNow() {
+    currentDate = new Date();
+    let dd = String(currentDate.getDate()).padStart(2, '0');
+    let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+    let yyyy = currentDate.getFullYear();
+    currentDate = yyyy + '-' + mm + '-' + dd; 
+}
+dateNow();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTaskInviteContact">addTaskInviteContact</a></li><li><a href="global.html#addTaskNewCategory">addTaskNewCategory</a></li><li><a href="global.html#categoryDropdownTemplate">categoryDropdownTemplate</a></li><li><a href="global.html#changeSubtaskCheckbox">changeSubtaskCheckbox</a></li><li><a href="global.html#checkCheckboxValue">checkCheckboxValue</a></li><li><a href="global.html#checkDescription">checkDescription</a></li><li><a href="global.html#checkPrio">checkPrio</a></li><li><a href="global.html#checkTitle">checkTitle</a></li><li><a href="global.html#clearInviteContact">clearInviteContact</a></li><li><a href="global.html#clearNewCategory">clearNewCategory</a></li><li><a href="global.html#clearNewSubtask">clearNewSubtask</a></li><li><a href="global.html#clearPrioSelection">clearPrioSelection</a></li><li><a href="global.html#closeDropdown">closeDropdown</a></li><li><a href="global.html#closeDropdownAssignedTo">closeDropdownAssignedTo</a></li><li><a href="global.html#closeDropdownCategory">closeDropdownCategory</a></li><li><a href="global.html#closeSubtaskCheckmark">closeSubtaskCheckmark</a></li><li><a href="global.html#colorInputEnter">colorInputEnter</a></li><li><a href="global.html#compareWithOldSelection">compareWithOldSelection</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskMessage">createTaskMessage</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#disableBody">disableBody</a></li><li><a href="global.html#disableMainContainer">disableMainContainer</a></li><li><a href="global.html#filterAwait">filterAwait</a></li><li><a href="global.html#filterDone">filterDone</a></li><li><a href="global.html#filterInput">filterInput</a></li><li><a href="global.html#filterProgress">filterProgress</a></li><li><a href="global.html#filterToDo">filterToDo</a></li><li><a href="global.html#focusSubtaskInput">focusSubtaskInput</a></li><li><a href="global.html#generateNav">generateNav</a></li><li><a href="global.html#getDueDate">getDueDate</a></li><li><a href="global.html#hover">hover</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#inviteInputEnter">inviteInputEnter</a></li><li><a href="global.html#isCurrentSite">isCurrentSite</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loseSubtaskFocus">loseSubtaskFocus</a></li><li><a href="global.html#newCategoryPush">newCategoryPush</a></li><li><a href="global.html#newSubtaskInputClickPress">newSubtaskInputClickPress</a></li><li><a href="global.html#openDropdownCategory">openDropdownCategory</a></li><li><a href="global.html#renderAssignDropdown">renderAssignDropdown</a></li><li><a href="global.html#renderAssignDropdownTemplate">renderAssignDropdownTemplate</a></li><li><a href="global.html#renderCategory">renderCategory</a></li><li><a href="global.html#renderCategoryColors">renderCategoryColors</a></li><li><a href="global.html#renderCategoryDropdown">renderCategoryDropdown</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderSubtasksTemplate">renderSubtasksTemplate</a></li><li><a href="global.html#requestPrioNumber">requestPrioNumber</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchIndexInArray">searchIndexInArray</a></li><li><a href="global.html#searchIndexInArrayCategory">searchIndexInArrayCategory</a></li><li><a href="global.html#searchIndexInArrayTasks">searchIndexInArrayTasks</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectCategoryColor">selectCategoryColor</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#selectedCategoryTemplate">selectedCategoryTemplate</a></li><li><a href="global.html#sendInvite">sendInvite</a></li><li><a href="global.html#sendInviteSuccessfully">sendInviteSuccessfully</a></li><li><a href="global.html#sendNewSubtask">sendNewSubtask</a></li><li><a href="global.html#sendTaskToDB">sendTaskToDB</a></li><li><a href="global.html#setDueDateMinToday">setDueDateMinToday</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#showCheckboxesAssignedTo">showCheckboxesAssignedTo</a></li><li><a href="global.html#showSelectedPrio">showSelectedPrio</a></li><li><a href="global.html#showSubtaskCheckmark">showSubtaskCheckmark</a></li><li><a href="global.html#stopClosing">stopClosing</a></li><li><a href="global.html#tooltip">tooltip</a></li><li><a href="global.html#unselectCategoryColor">unselectCategoryColor</a></li><li><a href="global.html#updateAssignedToHeadline">updateAssignedToHeadline</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#validateEmail">validateEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Feb 26 2023 18:54:21 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

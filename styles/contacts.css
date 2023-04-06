@@ -1,0 +1,1157 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: Inter;
+}
+.popUpCardBackground {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: default;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-timing-function: ease-in;
+  animation-duration: 225ms;
+}
+#designOfAddC {
+  background-color: #2a3647;
+  width: 340px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  padding: 50px;
+}
+.designFlex {
+  display: flex;
+  flex-direction: column;
+}
+.emailAndPhoneInput {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.task-subtitle {
+  color: white;
+}
+.addContactDesign {
+  color: white;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 55px;
+}
+.join-logo-a {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
+.strich-add {
+  width: 100px;
+}
+.task-content {
+  padding: 48px 50px 98px 50px;
+  font-family: "Inter", sans-serif;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+/* NEU */
+.content-contacts {
+  /* OVERFLOW-Y RAUS */
+  background: #f6f7f8;
+  position: absolute;
+  top: 92px;
+  left: 250px;
+  right: 0;
+  max-width: 600px;
+  /* PADDING RAUS */
+}
+.contacts {
+  width: 22%; /* NEU, VORHER: 20% */
+  background-color: white;
+  box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  padding: 40px 60px; /* NEU, VORHER KEIN PADDING */
+  height: 82vh;
+  overflow-y: auto; /* OVERFLOW NEU */
+}
+.firstAndLastInput {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.back-arrow-c {
+  object-fit: contain;
+  display: none;
+}
+.contact-letter {
+  border-bottom: 2px solid rgba(218, 218, 218, 0.838);
+  padding-bottom: 10px;
+}
+.d-flex {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.gap {
+  gap: 20px;
+}
+.border {
+  border-bottom: 2px rgba(0, 0, 0, 0.079) solid;
+  height: 40px;
+}
+.small-gap {
+  gap: 5px;
+}
+.r-gap {
+  gap: 50px;
+}
+.center {
+  align-items: center;
+}
+.profil-logo {
+  background-color: rgb(199, 207, 81);
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.r-profil-logo {
+  background-color: rgb(199, 207, 81);
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 50px;
+  border: 2px solid white;
+  color: rgb(255, 255, 255);
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.c-pointer {
+  cursor: pointer;
+}
+.margin-b {
+  margin-bottom: 30px;
+}
+.margin-top {
+  margin-top: 80px !important;
+}
+.email {
+  color: rgb(98, 191, 231);
+}
+.close-of-add-task {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.name {
+  font-size: 18px;
+}
+.d-flex {
+  display: flex !important;
+}
+.margin-left {
+  margin-left: 500px;
+}
+.width {
+  width: 33%;
+}
+.right-content {
+  margin-left: 100px;
+  margin-top: 50px;
+}
+.right-contacts {
+  color: black;
+}
+.font {
+  font-weight: bolder;
+  font-size: 51px;
+}
+.sub-font {
+  font-weight: 400;
+  font-size: 27px;
+  display: flex;
+  align-items: center;
+}
+.add-task {
+  color: rgb(98, 191, 231);
+  cursor: pointer;
+}
+.r-name {
+  font-size: 40px;
+  font-weight: 500;
+}
+.symbol {
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+.margin-right {
+  margin-right: 100px;
+}
+.c-p {
+  cursor: pointer;
+}
+.r-email {
+  font-weight: 700;
+  font-size: 22px;
+}
+.button-text {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+}
+.position {
+  position: absolute;
+  top: 90%;
+  left: 85%;
+}
+.margin-ll {
+  margin-left: 80px;
+}
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 193px;
+  height: 53px;
+  background-color: #2a3647;
+  padding: 18px, 10px, 18px, 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.clear-task, .create-task {
+  width: unset;
+}
+
+.position-abs {
+  position: absolute;
+  left: 900px;
+  top: 100px;
+}
+.larger {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  font-size: 30px;
+  border: 2px solid rgba(0, 0, 0, 0.263);
+}
+button:hover {
+  background-color: rgb(98, 191, 231);
+  transition: 0.3s ease-in-out;
+  border: 1px solid #e7e8e9;
+}
+.slide-in {
+  animation-name: slide-in;
+  animation-duration: 0.6s;
+}
+.m-gap {
+  gap: 20px;
+}
+.new-margin {
+  margin-bottom: 45px;
+  margin-top: 45px;
+}
+@keyframes slide-in {
+  from {
+    transform: translateX(60%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.479);
+  display: none;
+  z-index: 999;
+}
+#overlay2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.479);
+  display: none;
+  z-index: 999;
+}
+
+#popup {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 63%;
+  height: fit-content;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20;
+  border-radius: 30px;
+}
+.design {
+  min-height: fit-content;
+
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.user-design {
+  margin-left: 35px;
+  background-color: rgba(209, 209, 209, 1);
+  border-radius: 100px;
+  height: 90px;
+  width: 90px;
+  object-fit: contain;
+  padding: 30px;
+  border: 5px solid rgba(248, 248, 248, 0.952);
+}
+.user {
+  display: flex;
+  align-items: center;
+  margin-left: 70px;
+  margin-bottom: 30px;
+}
+.margin-l {
+  margin-left: 80px;
+  margin-bottom: 70px;
+}
+.phone {
+  color: rgb(21, 29, 46);
+  text-decoration: none;
+}
+.input-fields {
+  border-radius: 10px;
+  width: 322px;
+  padding: 13px, 21px, 13px, 21px;
+  height: 50px;
+  border: 1px solid rgba(169, 169, 169, 0.398);
+  font-size: 18px;
+  text-indent: 10px;
+}
+.white {
+  color: white;
+}
+.input-fields::placeholder {
+  text-indent: 10px;
+  color: #00000078;
+}
+.close-icon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.editMobileClose {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.close {
+  display: flex;
+  justify-content: flex-end;
+}
+.close-icon1 {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+.done-icon1 {
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+}
+
+.b-gap {
+  gap: 50px;
+}
+.cancel {
+  width: 120px;
+
+  font-size: 16px;
+}
+
+.create-c {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+.create-c1 {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+.btn-save:hover {
+  background-color: green !important;
+}
+
+.btn1 {
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f7f8;
+  gap: unset;
+}
+.btn1:hover {
+  background-color: rgba(191, 54, 54, 0.685);
+  color: white;
+  font-weight: 600;
+}
+.btn1:hover img {
+  filter: invert(1);
+}
+
+.gap1 {
+  gap: 10px;
+}
+.header-task-overlay img {
+  display: none!important;
+}
+.close-of-add-task img{
+  width: 25px;
+  height: 25px;
+}
+@media (max-width: 1880px) {
+  .input-fields {
+    width: 238px;
+    height: 40px;
+  }
+  .editPopUp {
+    margin-left: 55px;
+  }
+  .btn1 {
+    width: 100px;
+  }
+  .btn2 {
+    width: 136px;
+  }
+  .user {
+    margin-left: 35px;
+  }
+  .new-margin {
+    margin-left: 119px !important;
+  }
+  .btn-save {
+    margin-left: 60px;
+    width: 130px;
+  }
+}
+@media (max-width: 1750px) {
+  .popUp {
+    height: 490px;
+  }
+  .new-margin {
+    margin-left: 90px !important;
+    margin-top: 55px;
+  }
+  .input-fields {
+    min-height: 40px;
+  }
+  .editPopUp {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 1650px) {
+  .button-text {
+    font-size: 16px;
+    width: fit-content;
+  }
+  .editPopUp {
+    height: 140px !important;
+    width: 140px !important;
+  }
+  .position {
+    left: 80%;
+  }
+  .right-content {
+    margin-left: 0px;
+  }
+  .font {
+    font-size: 46px;
+  }
+  .sub-font {
+    font-size: 22px;
+  }
+  .r-profil-logo {
+    height: 75px;
+    width: 75px;
+  }
+  .r-name {
+    font-size: 35px;
+  }
+  .symbol {
+    height: 18px;
+    width: 18px;
+  }
+  .r-email {
+    font-size: 17px;
+  }
+  .email {
+    font-size: 15px;
+  }
+  .numberOfUser {
+    font-size: 15px;
+  }
+  #content {
+    padding: 40px 40px;
+  }
+  .contact-letter {
+    font-size: 21px;
+  }
+  .profil-logo {
+    height: 35px;
+    width: 35px;
+    font-size: 15px;
+  }
+  .name {
+    font-size: 16px;
+  }
+  .email {
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .addContactImg {
+    height: 30px;
+    width: 30px;
+  }
+}
+@media (max-width: 1715px) {
+  .user {
+    margin-left: 0px;
+  }
+  .new-margin {
+    margin-left: 70px !important;
+  }
+
+  @media (max-width: 1537px) {
+    .new-margin {
+      margin-left: 64px !important;
+    }
+  }
+
+  @media (max-width: 1582px) {
+    .popUp {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+    .btn-save {
+      margin-left: 121px;
+      margin-top: 20px;
+    }
+
+    .mobileUser {
+      position: absolute;
+      top: 31%;
+      left: 24%;
+    }
+    .firstAndLastInput {
+      flex-direction: unset;
+    }
+    .close-icon {
+      right: 15% !important;
+      top: -120% !important;
+      filter: invert(1);
+    }
+    .editMobileClose {
+      position: absolute;
+      top: -161%;
+      right: 4% !important;
+      filter: invert(1);
+    }
+    .paddingOfInput {
+      padding-left: 72px;
+      padding-right: 81px;
+    }
+    .btn1 {
+      width: 184px;
+    }
+    .btn2 {
+      width: 184px;
+    }
+    .buttonsOfAddC {
+      margin-left: unset !important;
+    }
+    .user-design {
+      height: 65px !important;
+      width: 65px !important;
+      padding: 20px;
+      top: 40% !important;
+      left: 28% !important;
+    }
+    .emailAndPhoneInput {
+      display: flex;
+      flex-direction: unset;
+      gap: 20px;
+    }
+    .buttonsOfAddC {
+      margin-left: 20px;
+    }
+    #firstNameId {
+      width: 175px;
+    }
+    #lastNameId {
+      width: 175px;
+    }
+    .gap1 {
+      gap: 16px;
+    }
+    .editMobile {
+      top: 60% !important;
+    }
+    .editMobileClose {
+      bottom: 227% !important;
+    }
+    #emailId {
+      width: 175px;
+    }
+    #phoneId {
+      width: 175px;
+    }
+    #popup {
+      width: 450px;
+      height: 650px;
+    }
+    #designOfAddC {
+      width: 351px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      border-bottom-left-radius: unset;
+      padding-left: 50px;
+      padding-right: 50px;
+      height: 160px;
+      padding-top: 113px;
+    }
+    #logoOfAddContact {
+      display: none;
+    }
+    .input-fields {
+      min-height: unset;
+    }
+
+    .design {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      width: 100%;
+      object-fit: cover;
+      height: 350px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+    .user-design {
+      position: fixed;
+      top: 40%;
+      left: 24%;
+      border-radius: 75px;
+      height: 90px;
+      width: 90px;
+    }
+    .new-margin {
+      margin-left: unset !important;
+      margin-top: unset !important;
+      position: absolute;
+      top: 53%;
+    }
+    .close-icon {
+      position: absolute;
+      bottom: 200%;
+      right: -15%;
+    }
+  }
+  @media (max-width: 1450px) {
+    .font {
+      font-size: 36px;
+    }
+    .close-of-add-task {
+      height: 40px;
+    }
+    .position-abs {
+      left: 800px;
+    }
+    .sub-font {
+      font-size: 18px;
+    }
+    .lineOfHeader {
+      height: 50px;
+    }
+    /*  */
+    .r-name {
+      font-size: 30px;
+    }
+    .r-profil-logo {
+      height: 60px;
+      width: 60px;
+    }
+    .add-task {
+      font-size: 14px;
+    }
+    .contactInfo {
+      font-size: 14px;
+    }
+    .c-p {
+      font-size: 14px;
+      height: 14px;
+    }
+    .r-email {
+      font-size: 14px;
+    }
+    .email {
+      font-size: 14px;
+    }
+    .phone {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 1432px) {
+    .user-design {
+      left: 24%;
+    }
+  }
+  @media (max-width: 1250px) {
+    .font {
+      font-size: 32px;
+    }
+    .position-abs {
+      left: 770px;
+    }
+    .sub-font {
+      font-size: 16px;
+    }
+    .lineOfHeader {
+      height: 40px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .position-abs {
+      left: 655px;
+    }
+    #content {
+      padding: 40px 40px !important;
+    }
+    .content-contacts {
+      left: 261px;
+    }
+  }
+  @media (max-width: 1050px) {
+    .position-abs {
+      left: 600px;
+    }
+  }
+  @media (min-width: 1046px) {
+    /* Hier kommen die CSS-Regeln, die für eine Breite von 1046px oder mehr gelten sollen */
+    #right-side {
+      display: block !important;
+    }
+    #showContact {
+      display: block !important;
+    }
+    #content {
+      display: block !important;
+    }
+  }
+
+  @media (max-width: 1045px) {
+    #right-side {
+      display: none;
+    }
+    #showContact {
+      display: none;
+    }
+    #content {
+      max-width: 100% !important;
+      width: auto;
+      overflow-y: unset !important;
+    }
+    .contacts {
+      height: fit-content;
+    }
+    .position {
+      position: fixed;
+      bottom: 30%;
+    }
+    .back-arrow-c {
+      display: block;
+    }
+    .position-abs {
+      left: 327px;
+    }
+  }
+
+  @media (max-width: 1035px) {
+    #closeAddTask {
+        position: absolute;
+        top: 20px;
+        right: 2px;
+    }
+}
+  @media (max-width: 1014px) {
+    .close-of-add-task {
+      height: 30px;
+    }
+  }
+
+  /* Pad */
+  @media (max-width: 768px) {
+    .header-add-task-resonsiv {
+        display: flex;
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 10%);
+        z-index: 98;
+        height: 40px;
+    }
+    #create-board-mobile {
+        width: 105px;
+        height: 50px;
+        top: 5px;
+    }
+    #create-board-mobile img {
+        width: 12px;
+    }
+
+    .content-contacts {
+      left: 0px;
+    }
+    .btn-save {
+      margin-left: 96px;
+    }
+    .position-abs {
+      left: 40px;
+    }
+    .position {
+      position: fixed;
+      top: 13%;
+      right: 10%;
+    }
+    .editMobileClose {
+      top: -148%;
+    }
+    .mobileUser {
+      left: 21%;
+    }
+  }
+}
+@media (max-width: 768px) {
+  #popup {
+    width: 400px;
+    height: 600px;
+  }
+  .content-contacts {
+    top: 35px;
+  }
+  .position-abs {
+    left: 47px;
+    top: 60px;
+  }
+  #designOfAddC {
+    padding-top: 100px;
+    width: 302px;
+  }
+  .input-fields {
+    width: 140px !important;
+  }
+  .btn1 {
+    width: 140px;
+  }
+  .btn2 {
+    width: 140px;
+  }
+  .buttonsOfAddC {
+    margin-left: 16px !important;
+  }
+  .emailAndPhoneInput {
+    gap: 16px;
+    margin-left: 12px;
+  }
+  .user-design {
+    top: 39% !important;
+    left: 26% !important;
+  }
+  .firstAndLastInput {
+    gap: 16px;
+    margin-left: 12px;
+  }
+
+  .addContactDesign {
+    font-size: 45px;
+  }
+  .close-icon {
+    top: -113% !important;
+  }
+}
+@media (max-width: 630px) {
+  .position {
+    left: 68%;
+    top: 85%;
+  }
+}
+
+@media (max-width: 510px) {
+  .font {
+    font-size: 28px;
+  }
+  .sub-font {
+    font-size: 14px;
+  }
+  .r-name {
+    font-size: 24px;
+  }
+  .r-gap {
+    gap: 27px;
+  }
+  .contactInfo {
+    margin-right: 55px;
+  }
+  .margin-top {
+    margin-top: 70px !important;
+  }
+  .button-text {
+    font-size: 12px;
+  }
+  .addContactButtonSymbol {
+    height: 20px;
+  }
+}
+@media (max-width: 540px) {
+  #popup {
+    width: 100vw;
+    height: 100vh;
+    border-radius: unset;
+  }
+  #designOfAddC {
+    padding-top: 86px;
+    width: 82vw;
+    height: 43vw;
+    padding-top: 113px;
+  }
+  #designOfAddC {
+    border-radius: unset;
+  }
+  
+  .editMobileClose {
+    top: -222%;
+  }
+
+  .addContactDesign {
+    font-size: 50px;
+  }
+  .gap1 {
+    gap: 22px;
+  }
+  .task-subtitle {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .strich-add {
+    width: 150px;
+  }
+
+  .input-fields {
+    width: 180px !important;
+  }
+  .btn1 {
+    width: 180px;
+  }
+  .btn2 {
+    width: 180px;
+  }
+}
+/* 
+@media (max-width: 425px) {
+  #closeAddTask {
+    top: 20px;
+    right: 20px;
+  }
+} */
+
+/* Phone */
+@media (max-width: 425px) {
+  .font {
+    font-size: 20px;
+  }
+  .sub-font {
+    font-size: 12px;
+  }
+  .contacts-header {
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .button-text {
+    height: 37px;
+  }
+  .profil-logo {
+    height: 25px;
+    width: 25px;
+  }
+  .border {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .addContactDesign {
+    font-size: 30px;
+  }
+  #designOfAddC {
+    position: relative;
+    padding-top: 48px;
+  }
+  .close-icon {
+    top: 15px !important;
+    left: 88%!important;
+  }
+  .user-design, .mobileUser {
+    position: unset;
+    z-index: 1;
+    margin: auto;
+    margin-top: -45px;
+  }
+
+  .new-margin {
+    position: unset;
+  }
+  .designFlex {
+    max-height: 121px;
+  }
+  .btn1, .btn2, .btn-save {
+    width: 116px;
+    height: 43px;
+  }
+  .cancel, .create-c {
+    font-size: 14px;
+  }
+  .done-icon1 {
+    height: 14px;
+    width: 14px;
+  }
+  .buttonsOfAddC {
+    justify-content: center;
+    margin-left: 0px!important;
+  }
+  .input-fields {
+    font-size: 16px;
+    width: 130px !important;
+  }
+  .task-subtitle {
+    font-size: 16px;
+  }
+  .user {
+    margin-bottom: 0;
+  }
+  .r-profil-logo {
+    margin: auto;
+    height: 83px!important;
+    width: 83px!important;
+    margin-top: -10px;
+  }
+  .r-name {
+    font-size: 20px;
+  }
+  .position-abs {
+    left: 0px;
+    right: 0px;
+    padding-left: 20px;
+  }
+  .margin-top {
+    margin-top: 45px !important;
+  }
+  .contactInfo {
+    margin-right: 34px;
+  }
+
+  .r-email {
+    font-size: 12px;
+  }
+  .email {
+    font-size: 12px;
+  }
+  .phone {
+    font-size: 12px;
+  }
+  #designOfAddC {
+    padding-top: 90px;
+    height: 63vw !important;
+  }
+  h1 {
+    font-size: 32px!important;
+  }
+  .task-content {
+    border-radius: unset;
+    background-color: #F5F5F5;
+    overflow-y: scroll;
+    height: 84vh;
+    width: 100%;
+    padding-left: 82px;
+    padding-top: 144px;
+  }
+  .popUpCardBackground {
+    background-color: transparent;
+    z-index: 3;
+  }
+  .editMobileClose {
+    top: 15px;
+  }
+  
+  .right-contacts {
+    width: 95%;
+  }
+  .close-of-add-task {
+    width: 90%;
+  }
+  .close-of-add-task img {
+      right: 18px;
+      width: 25px;
+      height: 25px;
+      z-index: 1;
+      margin-top: px;
+  }
+  .add_task-content-container {
+    margin-top: -41px;
+  } 
+}
+
+@media (max-width: 375px) {
+  .close-of-add-task {
+    width: 97%!important;
+  }
+  .task-content {
+    padding: 30px 46px;
+    padding-top: 97px;
+  }
+}
+
+@media (max-width: 320px) {
+  .close-of-add-task {
+    width: 109%!important;
+  }
+}
+
