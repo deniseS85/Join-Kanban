@@ -75,6 +75,41 @@ function createGhostCard(id) {
 
 
 /**
+ * create helper div to determine the position of drag-highlight
+ * this function is working like "position: sticky"
+ * @param {event} ev 
+ */
+function autoScrollDragHighlight(ev) {
+    let header = document.querySelector('#header');
+    let contentFixBoard = document.querySelector('#content .content-fix-board');
+    let headerHeight = header.offsetHeight; // Height from header
+    let contentFixBoardHeight = contentFixBoard.offsetHeight; // Height of contentFixBoard
+    let headerFullHeight = headerHeight + contentFixBoardHeight; // Add both heights
+    let dragHighlightHelperElements = document.querySelectorAll('#cards .drag-highlight-helper');
+    
+    
+    for (let i = 0; i < dragHighlightHelperElements.length; i++) {
+        let dragHighlightHelper = dragHighlightHelperElements[i];
+        let dragHighlight = dragHighlightHelper.parentElement.querySelector(".drag-highlight");
+        let dragHighlightHelperRect = dragHighlightHelper.getBoundingClientRect(); // Determine position and size of dragHighlightHelper
+        
+        // Check if dragHighlightHelper is still in the visible area after scrolling
+        if ((dragHighlightHelperRect.top - headerFullHeight) > 0) {
+            // If yes, then do nothing
+            dragHighlight.style.position = null;
+            dragHighlight.style.top = null;
+        } else {
+            // If not, make sure that dragHighlight scrolls so that you can move TaskCard to other columns.
+            dragHighlight.style.position = "absolute";
+            dragHighlight.style.top = (window.scrollY+headerFullHeight) + "px";
+        }
+    } 
+}
+
+document.addEventListener("scroll", autoScrollDragHighlight);
+
+
+/**
  * remove drag-highlight by dragend
  */
 function deleteGhostCard() {

@@ -1,4 +1,3 @@
-// ========== TITLE ==========
 /**
  * check if Title exist
  * @returns - input of Title Input box
@@ -15,6 +14,7 @@ function checkTitle() {
     }
 }
 
+
 /**
  * searched element in array['title']
  * @param {string} searchTerm - searched element in array
@@ -29,7 +29,7 @@ function searchIndexInArrayTasks(searchTerm, array) {
     return index; //Output Index or -1
 }
 
-// ========== DESCRIPTION ==========
+
 /**
  * check if Description exist
  * @returns - input of Description Input box
@@ -46,7 +46,7 @@ function checkDescription() {
     }
 }
 
-// ========== CATEGORY DROPDOWN BOX ==========
+
 /**
  * searched element in array['name']
  * @param {string} searchTerm - searched element in array
@@ -63,6 +63,7 @@ function searchNameIndexInArray(searchTerm, array) {
     return index;
 }
 
+
 /**
  * check if Category selected
  * @returns Index (CategoryArray) of selected Category
@@ -78,7 +79,7 @@ async function checkCategory() {
     }
 }
 
-// ========== ASSIGNED TO DROPDOWN BOX ==========
+
 /**
  * find Index of 'array' over email
  * @param {string} searchTerm - email of searched Contact
@@ -92,6 +93,7 @@ function searchIndexInArrayEmail(searchTerm, array) {
     
     return index;
 }
+
 
 /**
  * find Index of 'array' over email
@@ -107,6 +109,7 @@ function searchIndexInArray(searchTerm, array) {
     return index;
 }
 
+
 /**
  * validate Email syntax (name@domain.topLvlDomain)
  * @param {string} email 
@@ -117,7 +120,7 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// ========== DUE DATE ==========
+
 /**
  * return Date if ok else display error
  * @returns date
@@ -138,7 +141,7 @@ function getDueDate() {
     }
 }
 
-// ========== PRIO ==========
+
 /**
  * compare selected Prio with selected Prio before
  * @param {number} nr 
@@ -164,6 +167,7 @@ function compareWithOldSelection(nr) {
     } catch {}
 }
 
+
 /**
  * check if Title exist
  * @returns - input of Title Input box
@@ -178,7 +182,7 @@ function checkPrio() {
     }
 }
 
-// ========== SUBTASKS ==========
+
 /**
  * add/remove tick mark to substrings checkbox
  * @param {number} i - index of substrings
@@ -193,6 +197,7 @@ function checkCheckboxValue(i) {
         subtask.innerHTML = '';
     }
 }
+
 
 /**
  * Check if 

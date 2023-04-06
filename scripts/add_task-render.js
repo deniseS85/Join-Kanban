@@ -1,4 +1,3 @@
-// ========== CATEGORY DROPDOWN BOX ==========
 /**
  * call render function for Category Dropdown and Color
  */
@@ -6,6 +5,7 @@ function renderCategory() {
     renderCategoryDropdown();
     renderCategoryColors();
 }
+
 
 /**
  * render Category in Category Dropdown
@@ -19,6 +19,7 @@ function renderCategoryDropdown() {
         categoryArea.innerHTML += categoryDropdownTemplate(i, element);
     }
 }
+
 
 /**
  * render Colors for Category
@@ -34,6 +35,7 @@ function renderCategoryColors() {
     }
 }
 
+
 /**
  * template for render Category. fill Category Dropdown
  * @param {number} i - index
@@ -47,6 +49,7 @@ function categoryDropdownTemplate(i, element) {
         ${element['name']}
     </div>`;
 }
+
 
 /**
  * Template to display selected Category Name and Color on select box
@@ -62,7 +65,7 @@ function selectedCategoryTemplate(category) {
     <img src="./assets/img/arrow-down.png" alt="arrow down">`;
 }
 
-// ========== ASSIGNED TO DROPDOWN BOX ==========
+
 /**
  * render Assigned To Dropdown with Contact elements
  */
@@ -85,6 +88,7 @@ function renderAssignDropdown() {
     }
 }
 
+
 /**
  * Template for Assign Dropdown
  * @param {number} i - index 
@@ -99,6 +103,7 @@ function renderAssignDropdownTemplate(i, element) {
     </div>`;
 }
 
+
 /**
  * show how many People Assigned to the Task
  */
@@ -112,7 +117,7 @@ function updateAssignedToHeadline() {
     }
 }
 
-// ========== SUBTASKS ==========
+
 /**
  * render all subtasks
  */
@@ -126,6 +131,7 @@ function renderSubtasks() {
         subtaskContainer.style.maxHeight = '130px';
     }
 }
+
 
 /**
  * Template to render Subtasks

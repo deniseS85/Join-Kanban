@@ -5,6 +5,7 @@ let delete_task = new Audio('assets/sound/delete-task.mp3');
 let isOpenAssignedDropbox = false;
 let currentStatus;
 
+
 /**
  * onload function
  */
@@ -19,6 +20,7 @@ async function initBoard() {
     renderCategory(); 
 }
 
+
 /**
  * load all from database
  */
@@ -29,12 +31,14 @@ async function loadFromDB() {
     taskArray = JSON.parse(backend.getItem('tasks')) || [];
 }
 
+
 /**
  * add categories to database
  */
 async function addToDBCategory() {
     await backend.setItem('categories', JSON.stringify(categoryArray));
 }
+
 
 /**
  * add tasks to database
@@ -43,12 +47,14 @@ async function addToDBTask() {
    await backend.setItem('tasks', JSON.stringify(taskArray));
 }
 
+
 /**
  * add contacts to database
  */
 async function addToDBUsers() {
     await backend.setItem('users', JSON.stringify(usersArray));
 }
+
 
 /**
  * Update Drag and Drop Elements
@@ -59,6 +65,7 @@ function updateHTML() {
     filterAwait();
     filterDone(); 
 }
+
 
 /**
  * All ToDo Elements are filtered with content
@@ -84,6 +91,7 @@ function filterToDo() {
     createGhostCard('ToDo');
 }
 
+
 /**
  * All Progress Elements are filtered with content
  */
@@ -107,6 +115,7 @@ function filterProgress() {
     }  
     createGhostCard('progress');
 }
+
 
 /**
  * All Await Elements are filtered with content
@@ -132,6 +141,7 @@ function filterAwait() {
     createGhostCard('await');
 }
 
+
 /**
  * All Done Elements are filtered with content
  */
@@ -156,6 +166,7 @@ function filterDone() {
     createGhostCard('done');
 }
 
+
 /**
  * Help Function to find the index in array
  * @param {keyname} key 
@@ -165,6 +176,7 @@ function filterDone() {
 function findByKey(key, value) {
     return (item, i) => item[key] === value;
 }
+
 
 /**
  * open taskcards
@@ -178,6 +190,7 @@ function openPopUp(el) {
     document.getElementById('body').style.overflowY = 'hidden';
 }
 
+
 /**
  * close taskcard
  * @param {this} el this element
@@ -188,6 +201,7 @@ function closePopUp(el) {
     el.closest('.card-inkl-popups').setAttribute('draggable', true);
 }
 
+
 /**
  * open editcard
  * @param {this} el this element
@@ -196,6 +210,7 @@ function openEditPopUp(el) {
     el.closest('.card-inkl-popups').querySelector('.popup-card-content').style.display = 'none';
     el.closest('.card-inkl-popups').querySelector('.editOverlay').style.display = 'flex';
 }
+
 
 /**
  * open addtask popup, open over cardcontainer sort new tasks in this column (status)
@@ -209,6 +224,7 @@ function overlayAddTask(id) {
     document.getElementById('body').style.overflowY = 'hidden';
 }
 
+
 /**
  * close addtask popup
  */
@@ -218,6 +234,7 @@ function closePopUpAddTask() {
     document.getElementById('header').classList.remove('d-none');
     document.getElementById('body').style.overflowY = '';
 }
+
 
 /**
  * Inputvalues are filtered by letters. Only cards with this letters are displayed
@@ -239,6 +256,7 @@ function filterInput() {
     }
 }
 
+
 /**
  * click on x in input type search, show all cards
  */
@@ -248,6 +266,7 @@ function clearInput() {
         cards[i].style.display = 'flex'; 
     }
 }
+
 
 /**
  * change image by hover
@@ -261,6 +280,7 @@ function unhover(element) {
     element.setAttribute('src', 'assets/img/add-task-icon.png');
 }
 
+
 /**
  * prevent closing this window by onclick
  * @param {event} event 
@@ -268,6 +288,7 @@ function unhover(element) {
 function doNotCloseOverlay(event) {
     event.stopPropagation();
 }
+
 
 /**
  * get day, month, year and convert in format 2022 - 02 - 01
@@ -280,6 +301,7 @@ function dateNow() {
     currentDate = yyyy + '-' + mm + '-' + dd; 
 }
 dateNow();
+
 
 /**
  * by click on delete icon, show confirm window to say yes or no
@@ -303,6 +325,7 @@ function confirmDelete(el) {
         </div>`;
 }
 
+
 /**
  * delete task and save in DB
  * @param {this} el element
@@ -318,33 +341,3 @@ async function deleteTask(el) {
     document.getElementById('body').style.overflowY = 'scroll';
     await addToDBTask();
 }
-
-
-function autoScrollDragHighlight(ev) {
-    let header = document.querySelector('#header');
-    let contentFixBoard = document.querySelector('#content .content-fix-board');
-    let headerHeight = header.offsetHeight; // Höhe von header
-    let contentFixBoardHeight = contentFixBoard.offsetHeight; // Höhe von contentFixBoard
-    let headerFullHeight = headerHeight + contentFixBoardHeight; // Beide Höhen addieren
-    let dragHighlightHelperElements = document.querySelectorAll('#cards .drag-highlight-helper');
-    
-    
-    for (let i = 0; i < dragHighlightHelperElements.length; i++) {
-        let dragHighlightHelper = dragHighlightHelperElements[i];
-        let dragHighlight = dragHighlightHelper.parentElement.querySelector(".drag-highlight");
-        let dragHighlightHelperRect = dragHighlightHelper.getBoundingClientRect(); // Position und Größe von dragHighlightHelper ermitteln
-        
-        // Prüfe, ob dragHighlightHelper nach dem Scrollen noch im sichtbaren Bereich ist
-        if ((dragHighlightHelperRect.top - headerFullHeight) > 0) {
-            // Wenn ja, dann nichts machen
-            dragHighlight.style.position = null;
-            dragHighlight.style.top = null;
-        } else {
-            // Wenn nicht, dann dafür sorgen, dass dragHighlight mitscrollt, damit man PBIs auf andere Spalten verschieben kann
-            dragHighlight.style.position = "absolute";
-            dragHighlight.style.top = (window.scrollY+headerFullHeight) + "px";
-        }
-    } 
-}
-
-document.addEventListener("scroll", autoScrollDragHighlight);
