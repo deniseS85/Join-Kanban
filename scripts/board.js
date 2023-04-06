@@ -328,6 +328,7 @@ function autoScrollDragHighlight(ev) {
     let headerFullHeight = headerHeight + contentFixBoardHeight; // Beide Höhen addieren
     let dragHighlightHelperElements = document.querySelectorAll('#cards .drag-highlight-helper');
     
+    
     for (let i = 0; i < dragHighlightHelperElements.length; i++) {
         let dragHighlightHelper = dragHighlightHelperElements[i];
         let dragHighlight = dragHighlightHelper.parentElement.querySelector(".drag-highlight");
