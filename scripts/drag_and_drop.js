@@ -64,7 +64,7 @@ function dragend(ev) {
 function createGhostCard(id) {
     let dragCardHelper = document.createElement('div');
     dragCardHelper.classList.add('drag-highlight-helper');
-    dragCardHelper.classList.add('d-none');
+    dragCardHelper.style.visibility = 'hidden';
     document.getElementById(id).appendChild(dragCardHelper);
 
     let dragCard = document.createElement('div');
@@ -92,7 +92,7 @@ function autoScrollDragHighlight(ev) {
         let dragHighlightHelper = dragHighlightHelperElements[i];
         let dragHighlight = dragHighlightHelper.parentElement.querySelector(".drag-highlight");
         let dragHighlightHelperRect = dragHighlightHelper.getBoundingClientRect(); // Determine position and size of dragHighlightHelper
-        
+        console.log(dragHighlightHelperRect.top)
         // Check if dragHighlightHelper is still in the visible area after scrolling
         if ((dragHighlightHelperRect.top - headerFullHeight) > 0) {
             // If yes, then do nothing
@@ -101,7 +101,7 @@ function autoScrollDragHighlight(ev) {
         } else {
             // If not, make sure that dragHighlight scrolls so that you can move TaskCard to other columns.
             dragHighlight.style.position = "absolute";
-            dragHighlight.style.top = (window.scrollY+headerFullHeight) + "px";
+            dragHighlight.style.top = (window.scrollY + headerFullHeight) + "px";
         }
     } 
 }

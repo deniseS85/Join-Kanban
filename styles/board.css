@@ -403,6 +403,9 @@ img, a {
     display: none;
 }
 
+.v-hidden {
+    visibility: hidden;
+}
 
 /* Overlay Board  */
 .popUpCardBackground {
