@@ -1347,7 +1347,7 @@ img, a {
         height: 15px;    
     }
     #input {
-        width: 116px;
+    width: 100%;
     }
     .input-container-right {
         width: 23px;
@@ -1387,6 +1387,7 @@ img, a {
     #content {
         padding-top: 0;
         padding-bottom: 43px;
+        overflow-x: hidden;
     }
     .input-container, .input-field {
         align-items: center;

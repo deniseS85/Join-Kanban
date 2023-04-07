@@ -64,7 +64,13 @@ function generateNav() {
     menuContent.innerHTML = '';
     menuContentResponsiv.innerHTML = '';
 
-    menuContent.innerHTML += /*html*/`
+    menuContent.innerHTML += generateMenuContent();
+    menuContentResponsiv.innerHTML  += generateMenuContentResponsiv();
+}
+
+
+function generateMenuContent() {
+    return /*html*/`
         <a href="summary.html" class="link ${isCurrentSite('summary.html')}">
             <img src="assets/img/summary.png">Summary
         </a>
@@ -77,8 +83,11 @@ function generateNav() {
         <a href="contacts.html" class="link ${isCurrentSite('contacts.html')}">
             <img src="assets/img/contacts.png">Contacts
         </a>`;
+}
 
-    menuContentResponsiv.innerHTML  += /*html*/`
+
+function generateMenuContentResponsiv() {
+    return /*html*/`
         <a href="summary.html" class="link ${isCurrentSite('summary.html')}">
             <img src="assets/img/summary.png">Summary
         </a>

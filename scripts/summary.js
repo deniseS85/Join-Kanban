@@ -94,7 +94,14 @@ function getDatePrioUrgent(prioUrgent) {
           futureDate.push(urgentDates);
         }
     } 
+    getMinDate();
+}
 
+
+/**
+ * get the earliest date from today
+ */
+function getMinDate() {
     let minDate = Math.min(...futureDate);
     let day = new Date(minDate).getDate();
     let month = new Date(minDate).getMonth()+1;
@@ -114,22 +121,30 @@ function getDatePrioUrgent(prioUrgent) {
 function greetingResponsiv() { 
     if (window.innerWidth <= 1100) {
         setTimeout(function () {
-            let greeting = document.getElementById('greeting');
-            greeting.style.display = 'block';
-            greeting.style.transition = 'opacity 2s ease-in';
-            greeting.style.marginTop = '300px';
-
-            let summaryContent = document.getElementById('summaryContent');
-            summaryContent.style.display = 'none';
+            showGreetingText();
 
             setTimeout(function () {
-                // Hide element with ID 'greeting'
-                greeting.style.display = 'none';
-
-                summaryContent.style.display = 'block';
-                summaryContent.style.transition = 'opacity 0.5s ease-in';
+                hideGreetingText()
             }, 2000);
         }, 100);
     }
+}
+
+
+function showGreetingText() {
+    let greeting = document.getElementById('greeting');
+    greeting.style.display = 'block';
+    greeting.style.transition = 'opacity 2s ease-in';
+    greeting.style.marginTop = '300px';
+
+    let summaryContent = document.getElementById('summaryContent');
+    summaryContent.style.display = 'none';
+}
+
+
+function hideGreetingText() {
+    greeting.style.display = 'none';
+    summaryContent.style.display = 'block';
+    summaryContent.style.transition = 'opacity 0.5s ease-in';
 }
 

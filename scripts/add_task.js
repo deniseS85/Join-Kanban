@@ -181,20 +181,20 @@ function setPrio(nr) {
  */
 function showSelectedPrio(nr, urgent, medium, low) {
     if(nr == 1) {
-        urgent.classList.add('prio-selected');
-        urgent.classList.add('prio-urgent');
-        urgent.classList.remove('prio-element');
+        renderPrio(urgent, 'urgent');
     } else if(nr == 2) {
-        medium.classList.add('prio-selected');
-        medium.classList.add('prio-medium');
-        medium.classList.remove('prio-element');
+        renderPrio(medium, 'medium');
     } else if (nr == 3) {
-        low.classList.add('prio-selected');
-        low.classList.add('prio-low');
-        low.classList.remove('prio-element');
+        renderPrio(low, 'low');
     }
 }
 
+
+function renderPrio(el, prio) {
+    el.classList.add(`prio-selected`);
+    el.classList.add(`prio-${prio}`);
+    el.classList.remove(`prio-element`);
+}
 
 /**
  * remove Prio div selected Style
@@ -203,19 +203,17 @@ function showSelectedPrio(nr, urgent, medium, low) {
  * @param {Object} low - div container with Prio low content
  */
 function clearPrioSelection(urgent, medium, low) {
-    urgent.classList.remove('prio-selected');
-    urgent.classList.remove('prio-urgent');
-    urgent.classList.add('prio-element');
-
-    medium.classList.remove('prio-selected');
-    medium.classList.remove('prio-medium');
-    medium.classList.add('prio-element');
-
-    low.classList.remove('prio-selected');
-    low.classList.remove('prio-low');
-    low.classList.add('prio-element');
+    renderClearPrio(urgent, 'urgent');
+    renderClearPrio(medium, 'medium');
+    renderClearPrio(low, 'low');
 }
 
+
+function renderClearPrio(el, prio) {
+    el.classList.remove(`prio-selected`);
+    el.classList.remove(`prio-${prio}`);
+    el.classList.add(`prio-element`);
+}
 
 
 /**

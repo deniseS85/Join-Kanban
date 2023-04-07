@@ -1,12 +1,14 @@
 @font-face {
     font-family: 'Inter';
-    src: url('assets/fonts/Inter-Regular.woff') format('woff')
+    src: url('assets/fonts/Inter-Regular.woff') format('woff');
+    font-display: fallback;
         
 }
 
 @font-face {
     font-family: 'Inter Bold';
     src: url('assets/fonts/Inter-Bold.woff') format('woff');
+    font-display: fallback;
 }
 
 body {
@@ -606,7 +608,7 @@ form {
 .name-login {
     display: flex;
     align-items: center;
-    width: 197px;
+    width: 180px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 0 21px 0 21px;
@@ -1048,6 +1050,7 @@ form {
         padding-right: 20px;
         font-size: 16px;
         width: 71px;
+        gap: 7px;
     }
     .link img {
         width: 15px;
@@ -1266,7 +1269,7 @@ form {
         font-size: 16px;
     }
     .tooltip {
-        top: 61px;
+        top: 42px;
         right: 18px;
     }
     .login-container {
@@ -1364,11 +1367,8 @@ form {
     p {
         font-size: 16px;
     }
-    .nav-responsiv {
-        height: 3px;
-    }
     .menu-content-responsiv a {
-        height: 23px;
+        height: 44px;
         width: 20%;
         font-size: 12px;
         padding: 10px;

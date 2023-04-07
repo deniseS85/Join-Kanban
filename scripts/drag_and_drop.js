@@ -92,7 +92,7 @@ function autoScrollDragHighlight(ev) {
         let dragHighlightHelper = dragHighlightHelperElements[i];
         let dragHighlight = dragHighlightHelper.parentElement.querySelector(".drag-highlight");
         let dragHighlightHelperRect = dragHighlightHelper.getBoundingClientRect(); // Determine position and size of dragHighlightHelper
-        console.log(dragHighlightHelperRect.top)
+        
         // Check if dragHighlightHelper is still in the visible area after scrolling
         if ((dragHighlightHelperRect.top - headerFullHeight) > 0) {
             // If yes, then do nothing

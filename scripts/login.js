@@ -148,7 +148,8 @@ function resetSetTimeout(el) {
  * check if user is already exist, if not add new user and load in database
  */
 async function addUser() {
-    let user = usersArray.find(c => c.email == newEmail.value && c.password == newPassword.value);
+    let user = usersArray.find(c => c.email == newEmail.value);
+    console.log(newEmail.value)
     let message = document.getElementById('messageNewUser');
     let messageResponsiv = document.getElementById('confirm-text-responsiv-sign-up');
     let newMail = document.getElementById('newEmail').value.toLowerCase();
