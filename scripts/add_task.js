@@ -13,7 +13,7 @@ var subtasks = []; // Task Subtasks
 
 async function init() {
     await includeHTML();
-    setURL('https://denise-siegl.developerakademie.net/join_kanban/smallest_backend_ever');
+    setURL('https://denise.selfcoders.com/join_kanban/smallest_backend_ever');
     generateNav();
     generateHeader();
     initAddTaskElements();

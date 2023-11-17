@@ -3,7 +3,7 @@ let currentUser = [];
 async function initLogin() {
     await includeHTML();
     localStorage.clear();
-    setURL('https://denise-siegl.developerakademie.net/join_kanban/smallest_backend_ever');
+    setURL('https://denise.selfcoders.com/join_kanban/smallest_backend_ever');
     await contactsLoadFromDB(); // load Users from Database
 }
 
@@ -17,19 +17,20 @@ async function addToDBUsers() {
 }
 
 
-/**
- * start animation logo
- */
 function initAnimation() {
+    generateLoginHTML();
     let animation = document.getElementById('init-animation');
-    let animationImg = document.getElementById('init-animation-img');
+    let logo = document.getElementById('logo-black');
+    let header = document.getElementById('login-header');
+
     setTimeout(function () {
         animation.style.display = 'none';
-        animationImg.style.display = 'none';
-    }, 2420);
+        logo.style.visibility = 'visible';
+        header.style.zIndex = '1';
+    }, 1800);
 }
 
-
+/* 
 function initAnimationResponsiv() {
     let animation = document.getElementById('init-animation-responsiv');
     let animationImg = document.getElementById('init-animation-img-responsiv');
@@ -37,7 +38,7 @@ function initAnimationResponsiv() {
         animation.style.display = 'none';
         animationImg.style.display = 'none';
     }, 2420);
-}
+} */
 
 
 /**
@@ -47,14 +48,10 @@ function initAnimationResponsiv() {
 function login() {
     let user = usersArray.find(c => c.email == email.value && c.password == password.value);
     let message = document.getElementById('message');
-    let messageResponsiv = document.getElementById('confirm-text-responsiv-login');
    
     if(!user) {
         message.style.display = 'flex';
-        message.innerHTML = generateHTMLifNotUserDesktop();
-        messageResponsiv.style.display = 'inline';
-        document.getElementById('header-right-responsiv').style.display = 'none';
-        messageResponsiv.innerHTML = generateHTMLifNotUserMobile();
+        message.innerHTML = generateHTMLNotUser();
     } else {
         currentUser.push(user);
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -62,24 +59,6 @@ function login() {
     }
     email.value = '';
     password.value = '';
-}
-
-
-function generateHTMLifNotUserDesktop() {
-    return /*html*/ `
-        <div id="popUpBg" class="confirm-send-mail" onclick="closeOverlay()">
-            <div class="confirm-box">
-                <div onclick="doNotCloseOverlay(event)" class="register-text">You are not registered yet.<br> Click 
-                    <span class="here" onclick="openSignUp(this)">here</span> to sign up
-                </div>
-            </div>
-        </div>`;
-}
-
-function generateHTMLifNotUserMobile() {
-    return /*html*/`
-        You are not registered yet.<br> Click 
-            <span class="here-responsiv" onclick="openSignUp(this)">here</span> to sign up`;
 }
 
 
@@ -149,7 +128,6 @@ function resetSetTimeout(el) {
  */
 async function addUser() {
     let user = usersArray.find(c => c.email == newEmail.value);
-    console.log(newEmail.value)
     let message = document.getElementById('messageNewUser');
     let messageResponsiv = document.getElementById('confirm-text-responsiv-sign-up');
     let newMail = document.getElementById('newEmail').value.toLowerCase();
@@ -291,14 +269,6 @@ function openSignUpAfterRegister() {
     document.getElementById('header-right').style.display = 'flex';
 }
 
-function openForgotPasswort(el) {
-    el.closest('.login-container').querySelector('.login-inclusive-responsiv').style.display = 'none';
-    el.closest('.login-container').querySelector('.header-right').style.visibility = 'hidden';
-    el.closest('.login-container').querySelector('.forgot-inklusive-responsiv').style.display = 'flex';
-    document.getElementById('forgot-mail').value = '';
-    document.getElementById('confirmSendMail').style.display = 'none';
-    document.getElementById('resetYourPassword').style.display = 'none';
-}
 
 function closeForgotPasswort(el) {
     el.closest('.login-container').querySelector('.login-inclusive-responsiv').style.display = 'flex';

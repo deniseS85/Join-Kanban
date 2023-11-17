@@ -5,7 +5,7 @@ let taskForUser;
 
 async function initContacts(){
     await includeHTML();
-    setURL('https://denise-siegl.developerakademie.net/join_kanban/smallest_backend_ever');
+    setURL('https://denise.selfcoders.com/join_kanban/smallest_backend_ever');
     await loadUsers();
     generateHeader();
     generateNav();
