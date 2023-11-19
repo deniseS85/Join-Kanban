@@ -20,112 +20,19 @@
 
 <body onload="initLogin(); initAnimation()">
    
-    <div id="init-animation" class="init-animation" style="display:flex">
-        <img id="init-animation-img" src="assets/img/logo-init.png">
+    <div id="init-animation" class="init-animation">
+        <img id="init-animation-img">
     </div>
-
-   <!--  <div id="init-animation-responsiv" class="init-animation-responsiv" style="display: flex">
-        <img id="init-animation-img-responsiv" src="assets/img/logo-init-white.png" style="display: flex">
-    </div> -->
 
     <div class="login-header" id="login-header">
         <img id="logo-black" src="assets/img/logo-black.png">
         <div id="header-right" class="header-right">
             <div>Not a Join user?</div>
-            <button onclick="openSignUp(this)" class="sign-up">Sign up</button>
+            <button onclick="generateHTMLSignUp()" class="sign-up">Sign up</button>
         </div>
     </div>
 
-    <div class="login-container" id="login-container">
-       
-
-
-
-        <!-- ============= Forgot Password ======================== -->
-       <!--  <div class="forgot-inklusive-responsiv" style="display: none;"> -->
-            
-       <!--  </div> -->
-
-
-
-
-        <!-- ============= Reset Password ======================== -->
-        <div  id="reset-content" class="reset-inklusive-responsiv" style="display: none;">
-            <div class="reset-content">
-                <div class="login-title">
-                    <img onclick="closeResetPasswort(this)" src="assets/img/arrow-right-blue.png">
-                    <div class="forgot-title">Reset your password</div>
-                </div>
-                <img src="assets/img/login-underline.png">
-                <div class="forgot-text">Change your account password</div>
-                <form onsubmit="return false">
-                    <div class="login-input" style="height:70px">
-                        <div class="mail-reset">
-                            <input id="firstPassword" type="password" placeholder="New password" required>
-                            <img src="assets/img/mail-icon.png">
-                        </div>
-                        <div class="mail">
-                            <input id="secondPassword" type="password" placeholder="Confirm password" required>
-                            <img src="assets/img/mail-icon.png">
-                        </div>
-                    </div>
-                    <button onclick="resetPasswort(this)" class="reset-btn">Continue</button>
-                </form>
-                <div id="resetYourPassword" class="confirm-send-mail" style="display: none;">
-                    <div class="confirm-box">
-                        <div class="confirm-text">
-                            <img src="assets/img/sendCheck.png">
-                            You reset your password
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="confirm-send-mail-responsiv" id="confirm-send-mail-responsiv" style="display: none;"></div>
-        </div>
-
-        <!-- ============= Sign Up ======================== -->
-        <div class="sign-up-content-responsiv" id="signUpContent" style="display:none">
-            <div class="sign-up-content" >
-                <div class="login-content">
-                    <div class="login-title">
-                        <img onclick="closeSignUp(this)" src="assets/img/arrow-right-blue.png">
-                        <div>Sign up</div>
-                    </div>
-                    <img class="underline" src="assets/img/login-underline.png">
-        
-                    <form onsubmit="addUser(); return false">
-                        <div class="login-input">
-                            <div class="sign-up-fullname">
-                                <div class="name-login">
-                                    <input id="newFirstName" type="name" placeholder="Firstname" required>
-                                    <img src="assets/img/sign-up-name.png">
-                                </div>
-                                <div class="name-login">
-                                    <input id="newLastName" type="name" placeholder="Lastname" required>
-                                    <img src="assets/img/sign-up-name.png">
-                                </div>
-                            </div>
-                            <div class="mail">
-                                <input id="newEmail" type="email" placeholder="Email" required>
-                                <img src="assets/img/mail-icon.png">
-                            </div>
-                            <div class="mail">
-                                <input id="newPhone" type="tel" placeholder="Phone" required>
-                                <img class="phone" src="assets/img/phone.png">
-                            </div>
-                            <div class="mail">
-                                <input id="newPassword" type="password" placeholder="Password" required>
-                                <img src="assets/img/passwort-icon.png">
-                            </div>
-                        </div>
-                        <button class="sign-up-btn">Sign up</button>
-                        <div class="msg-box" id="messageNewUser" style="display:none"></div>
-                    </form>
-                </div>
-            </div>
-            <div class="confirm-text-responsiv-sign-up" id="confirm-text-responsiv-sign-up" style="display: none;"></div>
-        </div>
-    </div>
+    <div class="login-container" id="login-container"></div>
 
 </body>
 </html>

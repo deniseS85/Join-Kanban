@@ -306,9 +306,18 @@ tr td:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(246, 247, 248, 1);
     z-index: 1;
+}
+
+.desktop-bg {
+    background: rgba(246, 247, 248, 1);
     animation: bgOpacity 1.5s linear;
+    animation-delay: 1.5s;
+}
+
+.mobile-bg {
+    background-color: rgba(42, 54, 72, 1);
+    animation: bgOpacityMobile 1.5s linear;
     animation-delay: 1.5s;
 }
 
@@ -324,13 +333,36 @@ tr td:nth-child(2) {
     }
 }
 
+@keyframes bgOpacityMobile {
+    0% {
+        background: rgba(42, 54, 72, 1);
+    }
+    80% {
+        background: rgba(42, 54, 72, 0.8);
+    }
+    100% {
+        background: rgba(42, 54, 72, 0);
+    }
+}
+
 .init-animation img {
     position: absolute;
     height: clamp(12.5rem, 8.9286rem + 17.8571vw, 37.5rem);
     object-fit: contain;
+}
+
+.desktop-logo {
+    content: url('assets/img/logo-init.png');
     animation: slideLogo 1.5s linear;
     animation-delay: 1.5s;
 }
+
+.mobile-logo {
+    content: url('assets/img/logo-init-white.png');
+    animation: slideLogoMobile 1.5s linear;
+    animation-delay: 1.5s;
+}
+
 
 @keyframes slideLogo {
     0% {
@@ -340,17 +372,38 @@ tr td:nth-child(2) {
         transform: translate(-50%, -50%);
     }
     20% {
-        height: 20vw;
+        height: clamp(10.625rem, -0.5321rem + 23.77vw, 37.5rem);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    99% {
-        height: 6vw;
-        top: 30px;
-        left: 35px;
+    100% {
+        height: clamp(3.125rem, 0.7188rem + 5.0195vw, 8.75rem);
+        top: 40px;
+        left: 40px;
     }
 }
+
+@keyframes slideLogoMobile {
+    0% {
+        height:clamp(12.5rem, 8.9288rem + 17.8558vw, 17.29875rem);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    20% {
+        height: clamp(12.3125rem, 8.6381rem + 18.3721vw, 17.25rem);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        height: 60.39px;
+        top: 20px;
+        left: 20px;
+    }
+}
+
 /* ########################### End Animation ##################################*/
 
 /* ########################## Login Container #################################*/
@@ -393,6 +446,7 @@ tr td:nth-child(2) {
 }
 
 .header-right div {
+    font-family: 'Inter';
     font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
 }
 
@@ -430,34 +484,6 @@ tr td:nth-child(2) {
     padding: 35px 0px;
 }
 
-
-@media only screen and (max-width: 750px) {
-    .header-right {
-        transform: translateY(83vh);
-        position: absolute;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-    }
-    .login-content {
-        position: absolute;
-        top: 73px;
-        left: 0;
-        box-shadow: unset;
-        width: unset !important;
-        height: 360px !important;
-        border: 0;
-        right: 0;
-        background: transparent;
-        bottom: 143px;
-    }  
-    .password-check {
-        flex-direction: column;
-        height: 51px;
-    }
-}
-
 .title-container {
     display: flex;
     justify-content: center;
@@ -470,6 +496,7 @@ tr td:nth-child(2) {
     position: absolute;
     left: 6%;
     width: clamp(1.25rem, 0.9821rem + 1.3393vw, 3.125rem);
+    cursor: pointer;
 }
 .title {
     display: flex;
@@ -506,7 +533,7 @@ form {
     color: #D1D1D1;
 }
 
-.mail {
+.mail  {
     display: flex;
     align-items: center;
     border: 1px solid #D1D1D1;
@@ -520,6 +547,32 @@ form {
     width: clamp(1.0625rem, 0.9911rem + 0.3571vw, 1.5625rem);
     height: clamp(1.0625rem, 0.9911rem + 0.3571vw, 1.5625rem);
     object-fit: contain;
+}
+
+.new-user-input {
+    justify-content: space-between;
+}
+
+.new-user-input input {
+    font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
+    outline: none;
+    border: none;
+    height: 49px;
+    background-color: transparent;
+    width: clamp(6.25rem, 5rem + 6.25vw, 15rem);
+}
+
+.login-input>.new-user-input>img:first-of-type {
+    padding-right: 10px;
+}
+
+.new-user-input input:nth-last-child(2) {
+    border-left: 1px solid #D1D1D1;
+    padding-left: 10px;
+}
+
+.new-user-input input::placeholder {
+    color: #D1D1D1;
 }
 
 .password-check {
@@ -599,20 +652,7 @@ form {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: transparent;
-    z-index: 0;
-    animation: bg 2.25s forwards;
-}
-
-@keyframes bg {
-    0% {
-        background-color: transparent;
-        z-index: 0;
-    }
-    100% {
-        background-color: rgba(209, 209, 209, 0.5);
-        z-index: 2;
-    }
+    background-color: rgba(209, 209, 209, 0.5);
 }
 
 .confirm-box {
@@ -626,16 +666,6 @@ form {
     align-items: center;
     justify-content: center;
     line-height: 2;
-    animation: middle 1s forwards;
-}
-
-@keyframes middle {
-    0% {
-        top: 700px;
-    }
-    100% {
-        top: 254px;
-    }
 }
 
 .register-text {
@@ -661,91 +691,37 @@ form {
     justify-content: center;
     align-items: center;
     margin-top: 35px;
+    text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
-/* 
-.init-animation-responsiv {
-    display: none;
-}
-
-.init-animation-responsiv img {
-    display: none;
-}
-
-@keyframes bgOpacityResponsiv {
-    0% {
-        background: rgba(42, 54, 71, 1);
-    }
-    80% {
-        background: rgba(42, 54, 71, 0.4);
-    }
-    100% {
-        background: rgba(42, 54, 71, 0);
-    }
-} */
-/* 
-@keyframes slideLogoResponsiv {
-    0% {
-        width: 100px;
-        height: 122px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    20% {
-        width: 94px;
-        height: auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    80% {
-        content:url(assets/img/logo-init-white.png);
-    }
-    100% {
-        width: 50px;
-        top: 12px;
-        left: 14px;
-        height: auto;
-        content:url(assets/img/logo-init.png);
-    }
-} */
-
-
-
-
-
-/* 
-
-.header-right-responsiv {
-    display: none;
-    color: transparent;
-} */
-
-/* 
-.login-title img {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    width: 25px;
-    height: 25px;
+.forgot-btn {
+    width: clamp(10.625rem, 9.4643rem + 5.8036vw, 18.75rem);
+    height: clamp(2.125rem, 1.8929rem + 1.1607vw, 3.75rem);
+    background: #2A3647;
+    border-radius: 8px;
+    font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
+    color: white;
     cursor: pointer;
-} */
-
-.phone {
-    width: 27px!important;
-    height: 28px!important;
-    object-fit: contain;
+    transition: 255ms;
 }
+
+.forgot-btn:hover {
+    background-color: #29abe2;
+    border: none;
+    filter: saturate(105%);
+    transform: scale(1.01);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
+    transition: 255ms;
+}
+
+.send-forgot-img {
+    margin-right: 17px;
+}
+
+
+
+
+
 
 /* .header-right img:hover {
     background-color:  #29abe2;
@@ -755,198 +731,7 @@ form {
     box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
     transition: 255ms;
 }
- */
-/* 
-.login-inclusive-responsiv {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
-
-.confirm-text-responsiv, .confirm-send-mail-responsiv, .confirm-text-responsiv-login {
-    display: none;
-    color: transparent;
-}
-
-
-
-.forgot-inklusive-responsiv {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sign-up-content-responsiv {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.reset-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 35px 0px;
-    gap: 35px;
-    width: 826px;
-    height: 450px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-}
-
-.reset-inklusive-responsiv {
- position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.name-login {
-    display: flex;
-    align-items: center;
-    width: 180px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    padding: 0 21px 0 21px;
-    margin-top: 20px;
-}
-
-.mail-reset {
-    display: flex;
-    align-items: center;
-    width: 422px;
-    height: 51px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    padding: 0 21px 0 21px;
-    margin-bottom: 21px;
-}
-
-
-.sign-up-fullname {
-    display: flex;
-    justify-content: space-between;
-}
-
-.sign-up-fullname input {
-    font-size: 21px;
-    outline: none;
-    border: none;
-    width: 168px;
-    height: 49px;
-}
-
-
-.sign-up-btn {
-    width: 145px;
-    height: 51px;
-    background: #2A3647;
-    border-radius: 8px;
-    font-size: 21px;
-    color: white;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.sign-up-btn-responsiv {
-    color: transparent;
-    background: transparent;
-    display: none; 
-}
-
-
-/* .forgot-text {
-    width: 600px;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 21px;
-} */
-
-.forgot-btn {
-    width: 264px;
-    height: 51px;
-    background: #2A3647;
-    border-radius: 8px;
-    font-size: 21px;
-    color: white;
-    cursor: pointer;
-    margin-top: 48px;
-    margin-bottom: 20px
-}
-
-.reset-btn {
-    width: 264px;
-    height: 51px;
-    background: #2A3647;
-    border-radius: 8px;
-    font-size: 21px;
-    color: white;
-    cursor: pointer;
-    margin-top: 94px;
-    margin-bottom: 20px
-}
-
-.forgot-btn:hover {
-    background-color:  #29abe2;
-    border: none;
-    filter: saturate(105%);
-    transform: scale(1.01);
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
-    transition: 255ms;
-}
-
-
-
-.confirm-text-responsiv-sign-up {
-    color: transparent;
-}
-
-
-.confirm-text {
-    position: absolute;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: white;
-    font-size: 21px;
-    padding: 0px 20px;
-    width: 424px;
-    height: 74px;
-    background: #2A3647;
-    box-shadow: 0px 0px 4px rgb(0 0 0 / 15%);
-    border-radius: 20px;
-    animation: middle 1000ms forwards;
-    text-align: center;
-    line-height: 170%;
-}
-
-
-
-
-.register-text-new {
-    font-family: 'Inter';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    color: white;
-    font-size: 21px;
-    padding: 0px 20px;
-    width: 424px;
-    height: 74px;
-    background: #2A3647;
-    box-shadow: 0px 0px 4px rgb(0 0 0 / 15%);
-    border-radius: 20px;
-    animation: middle 1000ms forwards;
-}
-
-
+*/
 
 .template-add-task {
     position: relative;
@@ -955,13 +740,61 @@ form {
     align-items: center;
 }
 
-
-@media (max-width: 1024px) {
-    /* .login-header {
-        margin-bottom: 72px;
-    } */
+@media (max-width: 425px) {
+    .profile-image {
+        width: 14px;
+        height: 23px;
+        font-size: 16px;
+    }
+    .tooltip {
+        top: 60px;
+        right: 18px;
+    }
+    p {
+        font-size: 16px;
+    }
+    .menu-content-responsiv a {
+        height: 44px;
+        width: 20%;
+        font-size: 12px;
+        padding: 10px;
+        justify-content: space-evenly;
+    }
+    .link {
+        gap: 3px;
+    }
 }
 
+
+@media only screen and (max-width: 750px) {
+    .header-right {
+        transform: translateY(83vh);
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .login-content {
+        position: absolute;
+        top: 73px;
+        left: 0;
+        box-shadow: unset;
+        width: unset !important;
+        height: 360px !important;
+        border: 0;
+        right: 0;
+        background: transparent;
+        bottom: 143px;
+    }  
+    .password-check {
+        flex-direction: column;
+        height: 51px;
+    }
+    .send-forgot-img {
+        display: none;
+    }
+}
 
 @media (max-width: 768px) {
     .template-add-task {
@@ -994,39 +827,6 @@ form {
     #create-board-mobile img {
         width: 12px;
     }
-    /* .logo-black {
-        width: 50px;
-        height: 70px;
-    }
-    .init-animation {
-        display: none;
-    }
-    .init-animation img {
-        display: none;
-    } */
-    /* .init-animation-responsiv {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #2A3647;
-        z-index: 1;
-        animation: bgOpacityResponsiv 1.5s ease-in;
-        animation-direction: normal;
-        animation-delay: 1s;
-    }
-    .init-animation-responsiv img {
-        position: absolute;
-        height: clamp(12.5rem, 8.9286rem + 17.8571vw, 37.5rem);
-        object-fit: contain;
-        animation: slideLogoResponsiv 1.5s ease-in-out;
-        animation-direction: normal;
-        animation-delay: 1s;
-    } */
     nav {
         display: none;
     }
@@ -1102,354 +902,8 @@ form {
         width: 15px;
         height: 15px;
     }
-  /*   form {
-        font-size: 16px;
-        width: 100%;
-    } */
-   /*  .header-right-responsiv {
-        display: flex;
-        align-items: center;
-        margin-top: 50px;
-        color: black;
-    }
-    .header-right-responsiv div {
-        font-size: 21px;
-    }
-    .header-right-responsiv img:hover {
-        background-color:  #29abe2;
-        border: none;
-        filter: saturate(105%);
-        transform: scale(1.01);
-        box-shadow: 0px 4px 4px rgb(0 0 0 / 30%);
-        transition: 255ms;
-    }
     #messageNewUserResponsiv {
         display: flex;
-    }
-    .header-right {
-        display: none!important;
-    }
-    .login-content, .reset-content {
-        width: 372px;
-        height: 573px;
-        padding: 35px 0px 19px 0;
-    }
-    .login-input {
-        width: 78%;
-    }
-    .login-input input {
-        height: 38px;
-        width: 100%;
-    }
-    .mail {
-        width: 87%;
-        height: 41px;
-        margin-bottom: 21px;
-        margin-top: 36px;
-    }
-    .login-title {
-        font-size: 47px;
-    }
-    .password-check {
-        flex-direction: column-reverse;
-        height: 57px;
-    }
-    .login-btn {
-        flex-direction: column;
-        height: 148px;
-        align-items: center;
-        font-size: 16px;
-    }
-    .login-btn button {
-        width: 180px;
-        height: 51px;
-    }
-    .name-login {
-        height: 38px;
-        width: 97px;
-    }
-    .name-login input {
-        height: 35px;
-        width: 91px;
-    }
-    .login-input input::placeholder {
-        font-size: 16px;
-    }
-    .name-login input::placeholder {
-        font-size: 16px;
-    }
-    .sign-up-btn {
-        font-size: 16px;
-    }
-    .forgot-content {
-        width: 372px;
-        height: 573px;
-        padding: 35px 0px 19px 0;
-        animation: slide-top .3s ease-out forwards;
-    }   
-    @keyframes slide-top {
-        0% {
-            transform: translateY(0);
-            bottom: -600px;
-        }
-        100% {
-            transform: translateY(-100px);
-            bottom: -98px;
-        }
-    }
-    .forgot-title {
-        font-size: 38px;
-        text-align: center;
-    }
-    .forgot-text {
-        width: 80%;
-    }
-    .mail-reset {
-        height: 38px;
-        width: 87%;
-    }
-    .mail-reset input {
-        height: 35px;
-    }
-    .login-container {
-        background: transparent;
-    }
-    .register-text-new {
-        animation: none;
-    }
-    .confirm-send-mail {
-        display: none!important;
-    }
-    .sign-up-fullname img, .mail img {
-        width: 12px;
-    }
-    .phone {
-        width: 20px!important;
-        height: 20px!important;
-    }
-    .confirm-text-responsiv {
-        display: flex;
-        width: 300px;
-        height: 51px;
-        padding: 5px 15px;
-        border-radius: 8px;
-        background-color: #2A3647;
-        color: white;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 16px;
-        margin-top: 20px;
-    }
-    .confirm-text-responsiv-login {
-        display: inline;
-        text-align: center;
-        width: 300px;
-        height: 51px;
-        padding: 5px 15px;
-        border-radius: 8px;
-        background-color: #2A3647;
-        color: white;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 16px;
-        margin-top: 20px;
-    }
-    .confirm-send-mail-responsiv {
-        display: flex;
-        width: 200px;
-        height: 51px;
-        padding: 5px 15px;
-        border-radius: 8px;
-        background-color: #2A3647;
-        color: white;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        margin-top: 20px;
-    }
-    .confirm-text-responsiv-sign-up {
-        display: inline;
-        width: 210px;
-        height: 51px;
-        padding: 5px 15px;
-        border-radius: 8px;
-        background-color: #2A3647;
-        color: white;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        margin-top: 20px;
-    }
-    .here-responsiv {
-        display: inline;
-        color:  #29abe2;
-        font-weight: bold; 
-        cursor: pointer;
-        font-size: 21px;
-    }
-    .here-responsiv:hover { 
-        text-decoration: underline;
-    }
-    .sign-up-btn-responsiv {
-        display: block;
-        width: 145px;
-        height: 51px;
-        background: #2A3647;
-        border-radius: 8px;
-        font-size: 21px;
-        color: white;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-    .login-header {
-        position: absolute;
-        top: 12px;
-        left: 14px;
-    } */
+    } 
 }
-
-@media (max-width: 425px) {
-    .profile-image {
-        width: 14px;
-        height: 23px;
-        font-size: 16px;
-    }
-    .tooltip {
-        top: 60px;
-        right: 18px;
-    }
-    /* .login-container {
-        padding: 0 10px 0 10px;
-    }
-    .login-header {
-        position: absolute;
-        top: 12px;
-        left: 14px;
-    }
-    .logo-black {
-        width: 38px;
-        height: 51px;
-        z-index: 1;
-    }
-    .sign-up-btn-responsiv {
-        display: block;
-        width: 114px;
-        height: 39px;
-        font-size: 16px;
-    }
-    .login-btn {
-        height: 111px;
-    }
-    .login-btn button {
-        height: 39px;
-        font-size: 16px;
-        width: 150px;
-    }
-    .forgot-content {
-        height: 59vh;
-        background: #F6F7F8;
-        box-shadow: unset;
-    }
-    .login-content, .reset-content {
-        height: 69vh;
-        background: #F6F7F8;
-        box-shadow: unset;
-    }
-    .sign-up-content-responsiv {
-        width: 100%;
-        height: 573px;
-    }
-    .forgot-title {
-        font-size: 16px;
-        width: 100%;
-    }
-    .forgot-text {
-        width: 80%;
-        font-size: 16px;
-    }
-    .login-title {
-        font-size: 30px;
-    }
-    .login-title img {
-        width: 15px;
-        height: 15px;
-        top: 44px;
-        left: 51px;
-    }
-    .forgot-btn, .reset-btn {
-        width: 198px;
-        height: 42px;
-        font-size: 16px;
-    }
-    .sign-up {
-        width: 97px;
-    }
-    .header-right-responsiv div {
-        width: 161px;
-        font-size: 16px;
-    }
-    .sign-up-fullname {
-        flex-direction: column;
-        height: 124px;
-    }
-    .mail {
-        margin-top: 20px;
-    }
-    .name-login {
-        width: 87%;
-        height: 41px;
-    }
-    .name-login input {
-        width: 100%;
-        height: 38px;
-    }
-    .sign-up-btn {
-        margin: 0;
-        height: 40px;
-    }
-    .login-input {
-        height: unset;
-    }
-    p {
-        font-size: 16px;
-    }
-    .menu-content-responsiv a {
-        height: 44px;
-        width: 20%;
-        font-size: 12px;
-        padding: 10px;
-        justify-content: space-evenly;
-    }
-    .link {
-        gap: 3px;
-    }
-    .confirm-text-responsiv {
-        width: 71%;
-        height: 38px;
-    }
-    .confirm-text-responsiv img {
-        width: 20px;
-    }
-    .confirm-send-mail-responsiv {
-        height: 38px;
-    }
-    .password-check {
-        align-items: center;
-    }
-    .login-input input {
-        font-size: 16px;
-    } */
-}
-
-
-
-
-    
-    
-   
-    
-
-
-
-
 
