@@ -24,15 +24,15 @@ function initAnimation() {
     let header = document.getElementById('login-header');
    
     if (window.innerWidth > 750) {
-        animation.classList.add('desktop-bg');
+        animation.classList.add('init-animation', 'desktop-bg');
         animationLogo.classList.add('desktop-logo');
     } else {
-        animation.classList.add('mobile-bg');
+        animation.classList.add('init-animation', 'mobile-bg');
         animationLogo.classList.add('mobile-logo');
     }
 
     setTimeout(function () {
-        animation.classList.remove('desktop-bg', 'mobile-bg');
+        animation.classList.remove('init-animation', 'desktop-bg', 'mobile-bg');
         animationLogo.classList.remove('desktop-logo', 'mobile-logo');
         logo.style.visibility = 'visible';
         header.style.zIndex = '1';
@@ -62,6 +62,7 @@ function forgot() {
     messageForgot.style.display = 'flex';
     messageForgot.innerHTML = '';
     messageForgot.innerHTML = generateHTMLForgotMessage();
+    
 
     setTimeout(function() { 
         messageForgot.style.display = 'none';

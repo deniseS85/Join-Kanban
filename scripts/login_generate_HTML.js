@@ -1,6 +1,8 @@
 function generateHTMLLogin() {
     let loginContainer = document.getElementById('login-container');
+    let headerRight = document.getElementById('header-right');
 
+    headerRight.style.display = 'flex';
     loginContainer.innerHTML = '';
     loginContainer.innerHTML += /*html*/`
         <div class="login-content">
@@ -51,7 +53,9 @@ function generateHTMLNotUserMessage() {
 
 function generateHTMLForgot() {
     let loginContainer = document.getElementById('login-container');
+    let headerRight = document.getElementById('header-right');
 
+    headerRight.style.display = 'none';
     loginContainer.innerHTML = '';
     loginContainer.innerHTML += /*html*/`
         <div class="login-content">
@@ -88,6 +92,9 @@ function generateHTMLForgotMessage() {
 
 function generateHTMLReset() {
     let loginContainer = document.getElementById('login-container');
+    let headerRight = document.getElementById('header-right');
+
+    headerRight.style.display = 'none';
 
     loginContainer.innerHTML = '';
     loginContainer.innerHTML += /*html*/`
@@ -128,6 +135,9 @@ function generateHTMLResetMessage() {
 
 function generateHTMLSignUp() {
     let loginContainer = document.getElementById('login-container');
+    let headerRight = document.getElementById('header-right');
+
+    headerRight.style.display = 'none';
 
     loginContainer.innerHTML = '';
     loginContainer.innerHTML += /*html*/`

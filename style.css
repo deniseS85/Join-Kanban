@@ -421,7 +421,7 @@ tr td:nth-child(2) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px clamp(0.625rem, 0rem + 3.125vw, 5rem);;
+    padding: 60px clamp(0.625rem, 0rem + 3.125vw, 5rem);
     height: 100vh;
 }
 
@@ -451,8 +451,8 @@ tr td:nth-child(2) {
 }
 
 .sign-up {
-    width: clamp(5.125rem, 4.3393rem + 3.9286vw, 10.625rem);
-    height: clamp(2.125rem, 1.8929rem + 1.1607vw, 3.75rem);
+    height: clamp(2.5rem, 2.3214rem + 0.8929vw, 3.75rem);
+    width: clamp(8.125rem, 7.4107rem + 3.5714vw, 13.125rem);
     background: #2A3647;
     border-radius: 8px;
     font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
@@ -603,8 +603,8 @@ form {
 }
 
 .login-btn button:nth-child(1) {
-    width: clamp(6.875rem, 6.1607rem + 3.5714vw, 11.875rem);
-    height: clamp(2.125rem, 1.8929rem + 1.1607vw, 3.75rem);
+    width: clamp(8.125rem, 7.4107rem + 3.5714vw, 13.125rem);
+    height: clamp(2.5rem, 2.3214rem + 0.8929vw, 3.75rem);
     background: #2A3647;
     border-radius: 8px;
     font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
@@ -623,8 +623,8 @@ form {
 }
 
 .login-btn button:nth-child(2) {
-    width: clamp(6.875rem, 6.1607rem + 3.5714vw, 11.875rem);
-    height: clamp(2.125rem, 1.8929rem + 1.1607vw, 3.75rem);
+    height: clamp(2.5rem, 2.3214rem + 0.8929vw, 3.75rem);
+    width: clamp(8.125rem, 7.4107rem + 3.5714vw, 13.125rem);
     border: 1px solid #2A3647;
     border-radius: 8px;
     color: #2A3647;
@@ -695,8 +695,8 @@ form {
 }
 
 .forgot-btn {
-    width: clamp(10.625rem, 9.4643rem + 5.8036vw, 18.75rem);
-    height: clamp(2.125rem, 1.8929rem + 1.1607vw, 3.75rem);
+    height: clamp(2.5rem, 2.3214rem + 0.8929vw, 3.75rem);
+    width: clamp(15.625rem, 15rem + 3.125vw, 20rem);
     background: #2A3647;
     border-radius: 8px;
     font-size: clamp(1rem, 0.875rem + 0.625vw, 1.875rem);
