@@ -113,6 +113,7 @@ img, a {
     outline: none;
     width: 190px;
     font-size: 20px;
+    background-color: transparent;
 }
 
 #input::placeholder {
@@ -451,7 +452,9 @@ img, a {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    height: 46px;
+    align-items: center;
+    margin-bottom: 10px;
+   /*  height: 46px; */
 }
 
 .header-overlay img {
@@ -1210,6 +1213,11 @@ img, a {
 }
 
 @media (max-width: 579px) {
+    .textarea-edit-overlay {
+        font-size: 16px;
+        min-height: 84px;
+        padding: 5px 10px;
+    }
     /* .assign-container {
         width: 94%;
     } */
@@ -1240,19 +1248,25 @@ img, a {
         border-radius: unset;
         background-color: #F5F5F5;
     }
+    .category-overlay, .title-overlay, .notice-overlay, .text-overlay, .current-date-overlay {
+        font-size: 20px;
+    }
+    .editOverlay {
+        position: relative;
+        width: 500px;
+        height: 80vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 59px 40px 259px 40px;
+        overflow: scroll;
+    }
     .assigned-people {
-        overflow: scroll;
-        max-height: 49%;
-        overflow: scroll;
-        background: linear-gradient(#F5F5F5 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), #F5F5F5 70%) 0 100%, radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)), radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-        background: linear-gradient(#F5F5F5 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), #F5F5F5 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-        background-repeat: no-repeat;
-        background-color: #F5F5F5;
-        background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-        background-attachment: local, local, scroll, scroll;
+        background: #F4F4F4;
+       
     }
     .assigned-people div {
         margin-bottom: 7px;
+        font-size: 18px;
     }
     .footer-overlay {
         right: 6px;
@@ -1263,14 +1277,18 @@ img, a {
     .footer-overlay img {
         margin-top: 10px;
     }
-    .header-overlay {
+    /* .header-overlay {
         margin-bottom: 20px;
-    }
-    .card-text-overlay {
+    } */
+    /* .card-text-overlay {
         margin-bottom: 20px;
-    }
+    } */
     .section-overlay {
         width: 100%;
+        margin: 8px 0;
+    }
+    .assigned-overlay {
+        margin-top: 8px;
     }
     .arrow-responsiv {
         display: flex;
@@ -1283,9 +1301,40 @@ img, a {
         right: 39px;
         font-size: 16px;
         height: 41px;
+        width: 90px;
     }
     .cards {
         margin-top: 0;
+    }
+    .title-edit-overlay {
+        margin-top: 7px;
+        font-size: 20px;
+    }
+    .textarea-edit-overlay, .input-edit-overlay {
+        font-size: 16px;
+        padding: 5px 21px;
+    }
+    .first-title-edit-overlay {
+        font-size: 20px;
+    }
+    .prio-edit-overlay div {
+        height: 30px;
+        width: 100px;
+    }
+    .due-date {
+        font-size: 16px;
+        appearance: none;
+        -webkit-appearance: none;
+    } 
+    .input-edit-overlay {
+        height: 20px;
+    }
+    .assigned-people-edit {
+        height: auto;
+        overflow: visible;
+    }
+    .footer-overlay-edit {
+        padding-bottom: 20px;
     }
 }
 
@@ -1460,8 +1509,8 @@ img, a {
         margin-bottom: 50px;
     }
     .header-overlay {
-        margin-bottom: 0;
         width: 94%;
+        margin-bottom: 0;
     }
     .header-overlay img {
         width: 16px;
@@ -1500,11 +1549,11 @@ img, a {
     .assigned-people div {
         font-size: 12px;
     }
-    .footer-overlay {
+/*     .footer-overlay {
         bottom: 152px;
         right: 39px;
         flex-direction: unset;
-    }
+    } */
     .footer-overlay img {
         width: 36px;
         height: 36px;
@@ -1513,16 +1562,15 @@ img, a {
         font-size: 16px;
     }
     .input-edit-overlay {
-        height: 4px;
         font-size: 16px;
         margin-top: 10px;
     }
-    .due-date {
+    /* .due-date {
         height: 4px;
         font-size: 16px;
-    }
+    } */
     .prio-edit-overlay {
-        width: 94%;
+        width: 89%;
     }
     .prio-edit-overlay div {
         height: 31px;
@@ -1538,12 +1586,7 @@ img, a {
         padding-bottom: 7px;
         font-size: 16px;
     }
-    .textarea-edit-overlay {
-        font-size: 16px;
-        width: 87%;
-        min-height: 84px;
-        padding: 5px 10px;
-    }
+    
     .subtask-container {
         margin-bottom: 50px;
     }
@@ -1566,19 +1609,15 @@ img, a {
     .card-text-overlay {
         width: 93%;
     }
-    .title-edit-overlay {
+   /*  .title-edit-overlay {
         margin-top: 10px;
-    }
+    } */
     .drag-menu {
         width: 83%;
         height: 77%;
     }
     .drag-menu-title, .status-responsiv {
         font-size: 16px;
-    }
-    .assigned-people-edit {
-        height: auto;
-        overflow: visible;
     }
     .cardContainer {
         display: flex;
