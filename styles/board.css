@@ -746,7 +746,7 @@ img, a {
     display: flex;
     justify-content: space-between;
     font-family: 'Inter';
-    width: clamp(27.8125rem, 23.4186rem + 12.1212vw, 42.8125rem);
+    width: clamp(17.75rem, 14.1696rem + 17.9018vw, 42.8125rem);
 }
 
 .prio-edit-overlay div {
