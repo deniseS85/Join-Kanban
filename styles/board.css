@@ -439,7 +439,9 @@ img, a {
 .popup-card-content {
     position: relative;
     width: 500px;
+    width: clamp(31.25rem, 25.7576rem + 15.1515vw, 50rem);
     height: 788px;
+    height: clamp(49.25rem, 45.3687rem + 10.7071vw, 62.5rem);
     flex-direction: column;
     align-items: flex-start;
     padding: 40px;
@@ -544,7 +546,7 @@ img, a {
 .assigned-people {
     overflow: auto;
     padding-left: 4px;
-    height: 314px;
+    height: clamp(19.625rem, 15.4874rem + 11.4141vw, 33.75rem);
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -564,10 +566,7 @@ img, a {
 .assigned-people-edit {
     display: flex;
     flex-wrap: wrap;
-    height: auto;
-    overflow-x: hidden;
     width: 100%;
-    overflow-y: scroll;
 }
 
 .assigned-people-name {
@@ -599,9 +598,9 @@ img, a {
 }
 
 .delete-content {
-    position: relative;
-    width: 500px;
-    height: 670px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .delete-text {
@@ -614,7 +613,6 @@ img, a {
     color: white;
     font-size: 21px;
     padding: 0px 20px;
-    width: 424px;
     height: 121px;
     background: #2A3647;
     box-shadow: 0px 0px 4px rgb(0 0 0 / 15%);
@@ -748,7 +746,7 @@ img, a {
     display: flex;
     justify-content: space-between;
     font-family: 'Inter';
-    width: 90%;
+    width: clamp(27.8125rem, 23.4186rem + 12.1212vw, 42.8125rem);
 }
 
 .prio-edit-overlay div {
@@ -881,7 +879,7 @@ img, a {
 
 .subtask-content {
     width: 96%;
-    max-height: 145px;
+    height: clamp(9.0625rem, 6.0417rem + 8.3333vw, 19.375rem);
     overflow-y: scroll;
     overflow-x: hidden;
     cursor: pointer;
@@ -1012,15 +1010,16 @@ img, a {
     font-size: 21px;
     justify-content: center;
     align-items: center;
-    padding: 60px 80px;
+    /* padding: 60px 80px; */
     position: fixed;
     display: flex;
     align-items: center;
     top: 0;
     left: 0;
     right: 0;
-    height: 100vh;
-    background-color: transparent;
+    bottom: 0;
+   /*  height: 100vh; */
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 0;
     animation: bg 225ms forwards;
 }
@@ -1223,6 +1222,7 @@ img, a {
     } */
     .subtask-content {
         background: #F4F4F4;
+        max-height: unset;
     }
     .content-fix-board {
         position: unset;
@@ -1330,7 +1330,6 @@ img, a {
         height: 20px;
     }
     .assigned-people-edit {
-        height: auto;
         overflow: visible;
     }
     .footer-overlay-edit {

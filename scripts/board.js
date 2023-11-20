@@ -289,6 +289,10 @@ function doNotCloseOverlay(event) {
     event.stopPropagation();
 }
 
+function closeOverlay() {
+    document.getElementById('popUpBg').style.display = 'none';
+}
+
 
 /**
  * get day, month, year and convert in format 2022 - 02 - 01
