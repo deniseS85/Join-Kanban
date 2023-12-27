@@ -206,14 +206,6 @@ nav {
 
 .active-link {
     background-color: #091931;
-    height: 63px;
-    display: flex;
-    justify-content: center;
-    width: 25%;
-}
-
-a.link.active-link {
-    width: 25%;
 }
 
 
@@ -840,14 +832,15 @@ form {
         display: none;
     }
     .nav-responsiv {
-        width:clamp(18.75rem, -1.25rem + 100vw, 46.75rem);;
+        width:clamp(18.75rem, -1.25rem + 100vw, 46.75rem);
+        width: 100%;
         display: flex;
         background: rgb(42, 54, 71);
         box-shadow: rgb(0 0 0 / 10%) 0px 0px 4px;
         position: fixed;
         bottom: 0;
         z-index: 3;
-        padding: 20px 10px;
+        padding: 20px 0px;
         height: 24px;
     }
     #header {
@@ -900,7 +893,7 @@ form {
     .menu-content-responsiv a {
         flex-direction: column;
         padding: 0;
-        font-size: 16px;
+        font-size: 14px;
         width: 71px;
         gap: 7px;
         text-align: center;
@@ -912,4 +905,13 @@ form {
     #messageNewUserResponsiv {
         display: flex;
     } 
+    a.link {
+        width: 25%;
+    }
+    a.link.active-link {
+        width: 25%;
+        height: 64px;
+        display: flex;
+        justify-content: center
+    }
 }

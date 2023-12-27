@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/summary.css">
+    <link rel="stylesheet" href="styles/board.css">
     <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
     <script src="./smallest_backend_ever/mini_backend.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/summary.js"></script>
     <title>Summary</title>
 </head>
-
 <body onload="initSummary()">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
 
-    <div id="summary-content" onclick="closeToolTip(this)">
+    <div id="content" onclick="closeToolTip(this)">
         <div class="d-flex margin-left-100">
             <div id="summaryContent" class="summary-content">
 
                 <div class="summary-header d-flex align-center gap">
-                    <div class="subheader-of-summary">Kanban Project Management Tool</div>
-                    <h1 class="font header-summary">Summary</h1>
+                    <div class="project-name">Kanban Project Management Tool</div>
+                    <h1 class="title header-summary">Summary</h1>
                     <img class="mobile-strich" src="assets/img/Vector5.png"/>
                     <div class="strich">|</div>
                     <div class="header-description">Everything in a nutshell!</div>
