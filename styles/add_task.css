@@ -14,7 +14,7 @@ h1 {
 .content {
 max-height: unset;
 /* padding: 40px 60px 0 60px; */
-padding: 171px 60px 0 355px;
+padding: 151px 60px 0 326px;
 }
 
 #add_task-main {
@@ -35,7 +35,7 @@ width: 965px;
 .form-container {
 display: flex;
 flex-wrap: wrap;
-justify-content: center;
+/* justify-content: center; */
 }
 
 .not-markable {
@@ -448,9 +448,9 @@ user-select: none;
 
 /* ===== Buttons ===== */
 .add_task-btn {
-display: flex;
-justify-content: flex-end;
-gap: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
 }
 
 .add_task-btn button{
@@ -551,10 +551,10 @@ gap: 18px;
 height: 25px;
 }
 
-/* ===== MEDIA SIZE ===== */
+
 @media (max-height: 1010px) {
 .content {
-  padding: 110px 60px 0 355px;
+  padding: 151px 60px 0 326px;
 }
 }
 
@@ -563,10 +563,8 @@ h1 {
   font-size: 54px;
 }
 
-.content {
-  padding: 90px 60px 0 355px;
 }
-}
+
 
 @media (max-width: 1380px) or (max-height:922px) {
 h1 {
@@ -611,7 +609,6 @@ span {
 
 .add_task-btn button {
   height: unset;
-  /* padding: 8px 8px; */
 }
 
 .add_task-btn span{
@@ -697,9 +694,41 @@ span {
 }
 }
 
+@media (max-width: 1150px) {
+  .add_task-btn {
+    margin-right: 128px;
+  }
+}
 
-/* 1145px */
-@media (max-width: 1014px) or (max-height:850px) {
+@media (max-width: 1000px) {
+  .add_task-btn {
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .create-task-mobile {
+    display: flex;
+  }
+  .add_task-btn {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1050px) or (max-height:850px) {
+
 #add_task-main {
   padding-bottom: 60px!important;
 }
@@ -734,6 +763,12 @@ span {
   display: flex;
   flex-wrap: unset;
   flex-direction: column;
+}
+
+.add_task-btn {
+  justify-content: center;
+  margin-top: 20px;
+  margin-right: 0;
 }
 
 .container-2 {
@@ -782,13 +817,8 @@ span {
   margin: 0;
 }
 
-.add_task-btn {
-  display: none;
-}
 
-.create-task-mobile {
-  display: flex;
-}
+
 .container-3 {
   height: auto;
 }

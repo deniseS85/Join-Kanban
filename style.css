@@ -720,11 +720,6 @@ form {
     margin-right: 17px;
 }
 
-
-
-
-
-
 /* .header-right img:hover {
     background-color:  #29abe2;
     border: none;
@@ -738,9 +733,10 @@ form {
 .template-add-task {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
+  
 
 @media (max-width: 425px) {
     .profile-image {
@@ -798,10 +794,6 @@ form {
 }
 
 @media (max-width: 768px) {
-    .template-add-task {
-        position: unset;
-        display: unset;
-    }
     .tooltip {
         top: 61px;
     }
@@ -913,5 +905,13 @@ form {
         height: 64px;
         display: flex;
         justify-content: center
+    }
+
+   
+}
+
+@media (max-width: 1050px) {
+    .template-add-task {
+      justify-content: center;
     }
 }
