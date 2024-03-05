@@ -743,7 +743,7 @@ span {
 
 @media (max-width: 504px) {
   .content {
-    padding: 85px 0 0 0;
+    padding: 42px 0 0 0;
     display: flex;
     justify-content: center;
   }
@@ -751,13 +751,6 @@ span {
 
 
 @media (max-width: 768px) {
-
-/* #add_task-main {
-  padding-bottom: 60px!important;
-} */
-/* .content {
-  padding: 70px 0 0 30%;
-} */
 
 .padding-right {
   border: 0;

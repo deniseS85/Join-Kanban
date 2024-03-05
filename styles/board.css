@@ -722,7 +722,6 @@ img, a {
 .template-add-task {
     width: 100%;
     display: flex;
-    align-items: center;
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
@@ -865,7 +864,7 @@ img, a {
 @media only screen and (min-width: 769px) and  (max-width: 1103px) {
     .task-content {
         max-height: 868px;
-        padding-top: 0;
+       /*  padding-top: 0; */
         width: 696px;
     }
     .header-task-overlay {
@@ -1258,11 +1257,10 @@ img, a {
         width: 100%;
         border-radius: unset;
         background-color: #F5F5F5;
-       /*  overflow-y: auto; */
         height: 100vh;
         display: flex;
         justify-content: center;
-        padding: 0;
+        padding: 56px 0 0 0 ;
     }
     .popUpCardBackgroundAddTask {
         background-color: transparent;

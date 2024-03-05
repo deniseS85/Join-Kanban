@@ -405,22 +405,3 @@ function closeOverlayContacts() {
 function doNotCloseOverlay(event) {
   event.stopPropagation();
 }
-
-function setMarginTopBasedOnViewport() {
-  const viewportWidth = window.innerWidth;
-  const addTaskElement = document.querySelector('.template-add-task')
-
-  // Mindestgröße von 320px und maximale Größe von 882px
-  if (viewportWidth >= 320 && viewportWidth <= 882) {
-    addTaskElement.style.marginTop = '50px';
-  } else {
-    addTaskElement.style.marginTop = '50px';
-  }
-}
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  setMarginTopBasedOnViewport();
-
-  window.addEventListener('resize', setMarginTopBasedOnViewport);
-});
