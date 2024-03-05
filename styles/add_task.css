@@ -31,6 +31,7 @@ margin: 108px 14px 10px 107px; */
 .add_task-content-container {
 position: relative;
 width: 965px;
+height: 100%;
 }
 
 .form-container {
@@ -576,7 +577,7 @@ h1 {
 
 }
 
-
+/* 
 @media (max-width: 1380px) or (max-height:922px) {
 h1 {
   font-size: 50px;
@@ -629,9 +630,9 @@ span {
 .container-3 {
   width: 350px;
 }
-}
+} */
 
-@media (max-width: 1235px) or (max-height:892px) {
+/* @media (max-width: 1235px) or (max-height:892px) {
 h1 {
   font-size: 47px;
   margin-top: 19px;
@@ -643,16 +644,16 @@ span {
 }
 
 #add_task-main {
-  font-size: 16px;
+  font-size: 16px; */
   /* justify-content: center; */
 
-}
+/* } */
 
 /* .content {
   padding-left: 170px;
   padding-right: 0;
 } */
-
+/* 
 .new_task-container input, textarea, select {
   font-size: 16px;
 }
@@ -673,8 +674,8 @@ span {
   margin-top: -70px;
 }
 }
-
-@media (max-width: 1235px) {
+ */
+@media (max-width: 1103px) {
 .padding-right {
   padding-right: 39px;
 }

@@ -20,6 +20,15 @@ body {
   animation-timing-function: ease-in;
   animation-duration: 225ms;
 }
+.task-content {
+  display: flex;
+}
+
+/* @media only screen and (min-width: 769px) and (max-width: 1103px) { 
+  .task-content {
+    padding-top: 20px;
+  }
+} */
 #designOfAddC {
   background-color: #2a3647;
   width: 340px;
@@ -781,7 +790,7 @@ button:hover {
   @media (max-width: 1035px) {
     #closeAddTask {
         position: absolute;
-        top: 20px;
+        top: 40px;
         right: 2px;
     }
 }
@@ -1062,6 +1071,7 @@ button:hover {
   .popUpCardBackgroundAddTask {
     background-color: transparent;
     z-index: 3;
+    padding-top: 118px;
   }
   .editMobileClose {
     top: 15px;
@@ -1070,5 +1080,19 @@ button:hover {
   .right-contacts {
     width: 95%;
   }
+
+  .template-add-task {
+    width: 100%;
+    display: flex;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .template-add-task {
+        justify-content: center;
+        padding-top: 50px;
+    }
+    
+}
+
 }
 

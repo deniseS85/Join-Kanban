@@ -722,10 +722,7 @@ img, a {
 .template-add-task {
     width: 100%;
     display: flex;
-   /*  padding-bottom: 50px; */
-   /*  justify-content: center; */
-    /* padding-bottom: 90px; */ /* */
-   /*  overflow-y: auto; */
+    align-items: center;
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
