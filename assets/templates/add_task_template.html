@@ -5,7 +5,7 @@
     </a> 
 </div>
 
-<div id="add_task-main" onclick="closeToolTip(this)">
+<div id="add_task-main" class="add_task-main-board" onclick="closeToolTip(this)">
     <div class="add_task-content-container">
         <div class="header-task-overlay">
             <h1>Add Task</h1>
@@ -34,7 +34,7 @@
                 <div>
                     <div class="new_task-container">
                         <span>Due date</span>
-                        <input id="due-date" type="date" value="" onfocusout="getDueDate()" class="not-markable">
+                        <input id="due-date" type="date" value="" onfocusout="getDueDate()" class="not-markable" max="9999-12-31">
                     </div>
                     <div id="error-due_date" class="error-container"></div>
                 </div>
@@ -115,6 +115,11 @@
                             <button onclick="sendInvite()" type="button"><img src="./assets/img/checkmark.png" alt="check mark" class="not-markable"></button>
                         </div>              <!-- error-container -->
                         <div id="error-invite_contact" class="" style="padding: 0;"></div>
+
+
+
+                        <!-- ########## -->
+                        <div class="assigned-people-edit"></div>
                     </div>
                 </div>
             </div>

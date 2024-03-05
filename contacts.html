@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/contacts.css">
     <link rel="stylesheet" href="styles/add_task.css">
+    <link rel="stylesheet" href="styles/board.css">
     <script src="scripts/add_task-check.js"></script>
     <script src="scripts/add_task.js"></script>
     <script src="scripts/add_task-render.js"></script>
@@ -24,32 +25,27 @@
 <body id="body" onload="initContacts()">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
-    
-    <div id="overlay" onclick="closeOverlayContacts()"></div>
-    <div id="overlay2"></div>
-    
-    
 
-    <div>
-        <div id="content" class="contacts content-contacts" onclick="closeToolTip(this)"></div>
+        <div id="overlay" onclick="closeOverlayContacts()"></div>
+        <div id="overlay2"></div>
         
-        <div class="position-abs" onclick="closeToolTip(this)">
-            <div id="right-side" class="right-content"></div>
-            <div id="showContact" class="right-content"></div>
-        </div>
-    </div>
-    <div id="add-contact" class="add-contact"></div>
-
-    <div id="task-overlay-c" style="display: none;">
-        <div class="popUpCardBackground" onclick="overlayAddTaskContacts(), closeAddTaskPopUpC()">
-            <div class="task-content" onclick="doNotCloseOverlay(event)">
-                <div class="close-of-add-task" onclick="closeAddTaskPopUpC()">
-                    <img src="assets/img/close.png"/>
-                </div>
-                <div class="template-add-task" w3-include-html="assets/templates/add_task_template.html"></div>
+        <div>
+            <div id="content" class="contacts content-contacts" onclick="closeToolTip(this)"></div>
+            
+            <div class="position-abs" onclick="closeToolTip(this)">
+                <div id="right-side" class="right-content"></div>
+                <div id="showContact" class="right-content"></div>
             </div>
         </div>
-    </div>
+        <div id="add-contact" class="add-contact"></div>
+
+        <div id="task-overlay" style="display: none;">
+            <div class="popUpCardBackgroundAddTask" onclick="overlayAddTaskContacts(), closeAddTaskPopUpC()">
+                <div class="task-content" onclick="doNotCloseOverlay(event)">
+                    <div class="template-add-task" w3-include-html="assets/templates/add_task_template.html"></div>
+                </div> 
+            </div>
+        </div>
     
     <div w3-include-html="assets/templates/mobile_template.html"></div>
 </body>

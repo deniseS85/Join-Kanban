@@ -103,6 +103,7 @@ function generateMenuContentResponsiv() {
 }
 
 
+
 /**
  * generate Header with profil Image Guest or registred user
  */

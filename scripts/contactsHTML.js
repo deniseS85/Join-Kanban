@@ -95,11 +95,12 @@ function editContactHTML(color, initials, firstName,lastName, email, phone){
 function showContactButtonHTML() {
   let button = document.getElementById('add-contact');
   button.innerHTML = /*html*/` 
-      <button onclick="addContact()" class="button-text position">
-          <div>Add contact</div>
+      <button onclick="addContact()" class="position">
+          <div  class="button-text">Add contact</div>
           <img class="addContactButtonSymbol"src="assets/img/addContact.png">
       </button>`;
 }
+
 
 
 // shows overlay for adding new contact

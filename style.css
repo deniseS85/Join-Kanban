@@ -730,12 +730,12 @@ form {
 }
 */
 
-.template-add-task {
+/* .template-add-task {
     position: relative;
     display: flex;
     justify-content: left;
     align-items: center;
-}
+} */
   
 
 @media (max-width: 425px) {
@@ -909,9 +909,33 @@ form {
 
    
 }
-
+/* 
 @media (max-width: 1050px) {
     .template-add-task {
       justify-content: center;
     }
-}
+} */
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(42, 54, 71);
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

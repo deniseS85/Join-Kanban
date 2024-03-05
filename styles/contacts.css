@@ -3,7 +3,7 @@
 body {
   font-family: Inter;
 }
-.popUpCardBackground {
+.popUpCardBackgroundAddTask {
   position: fixed;
   display: flex;
   top: 0;
@@ -53,13 +53,7 @@ body {
 .strich-add {
   width: 100px;
 }
-.task-content {
-  padding: 48px 50px 98px 50px;
-  font-family: "Inter", sans-serif;
-  background: #ffffff;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
-}
+
 /* NEU */
 .content-contacts {
   /* OVERFLOW-Y RAUS */
@@ -153,11 +147,7 @@ body {
 .email {
   color: rgb(98, 191, 231);
 }
-.close-of-add-task {
-  display: flex;
-  justify-content: flex-end;
-  cursor: pointer;
-}
+
 .name {
   font-size: 18px;
 }
@@ -219,6 +209,7 @@ body {
   font-size: 21px;
   line-height: 120%;
   color: #ffffff;
+  height:25px;
 }
 .position {
   position: absolute;
@@ -427,13 +418,7 @@ button:hover {
 .gap1 {
   gap: 10px;
 }
-.header-task-overlay img {
-  display: none!important;
-}
-.close-of-add-task img{
-  width: 25px;
-  height: 25px;
-}
+
 @media (max-width: 1880px) {
   .input-fields {
     width: 238px;
@@ -490,9 +475,7 @@ button:hover {
   .right-content {
     margin-left: 0px;
   }
-  /* .font {
-    font-size: 61px;
-  } */
+
   .sub-font {
     font-size: 22px;
   }
@@ -684,12 +667,7 @@ button:hover {
     }
   }
   @media (max-width: 1450px) {
-   /*  .font {
-      font-size: 36px;
-    } */
-    .close-of-add-task {
-      height: 40px;
-    }
+
     .position-abs {
       left: 744px;
     }
@@ -699,7 +677,7 @@ button:hover {
     .lineOfHeader {
       height: 75px;
     }
-    /*  */
+
     .r-name {
       font-size: 30px;
     }
@@ -733,9 +711,7 @@ button:hover {
     }
   }
   @media (max-width: 1250px) {
-   /*  .font {
-      font-size: 32px;
-    } */
+  
     .position-abs {
       left: 770px;
     }
@@ -809,29 +785,11 @@ button:hover {
         right: 2px;
     }
 }
-  @media (max-width: 1014px) {
-    .close-of-add-task {
-      height: 30px;
-    }
-  }
+
 
   /* Pad */
   @media (max-width: 768px) {
-    .header-add-task-resonsiv {
-        display: flex;
-        position: fixed;
-        left: 0px;
-        right: 0px;
-        top: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 4px rgb(0 0 0 / 10%);
-        z-index: 98;
-        height: 40px;
-    }
+  
     #create-board-mobile {
         width: 105px;
         height: 50px;
@@ -988,13 +946,7 @@ button:hover {
     width: 180px;
   }
 }
-/* 
-@media (max-width: 425px) {
-  #closeAddTask {
-    top: 20px;
-    right: 20px;
-  }
-} */
+
 
 /* Phone */
 @media (max-width: 425px) {
@@ -1106,16 +1058,8 @@ button:hover {
   h1 {
     font-size: 32px!important;
   }
-  .task-content {
-    border-radius: unset;
-    background-color: #F5F5F5;
-    overflow-y: scroll;
-    height: 84vh;
-    width: 100%;
-    padding-left: 82px;
-    padding-top: 144px;
-  }
-  .popUpCardBackground {
+
+  .popUpCardBackgroundAddTask {
     background-color: transparent;
     z-index: 3;
   }
@@ -1125,35 +1069,6 @@ button:hover {
   
   .right-contacts {
     width: 95%;
-  }
-  .close-of-add-task {
-    width: 90%;
-  }
-  .close-of-add-task img {
-      right: 18px;
-      width: 25px;
-      height: 25px;
-      z-index: 1;
-      margin-top: px;
-  }
-  .add_task-content-container {
-    margin-top: -41px;
-  } 
-}
-
-@media (max-width: 375px) {
-  .close-of-add-task {
-    width: 97%!important;
-  }
-  .task-content {
-    padding: 30px 46px;
-    padding-top: 97px;
-  }
-}
-
-@media (max-width: 320px) {
-  .close-of-add-task {
-    width: 109%!important;
   }
 }
 

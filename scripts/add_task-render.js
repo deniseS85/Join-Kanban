@@ -117,6 +117,10 @@ function updateAssignedToHeadline() {
     }
 }
 
+function showAssignedPeople() {
+    let assignedPeople = document.querySelector('.assigned-people-edit');
+}
+
 
 /**
  * render all subtasks

@@ -247,8 +247,9 @@ function filterInput() {
     for (let i = 0; i < cards.length; i++) {
         let title = cards[i].querySelector('.card-title').innerHTML;
         let notice = cards[i].querySelector('.card-notice').innerHTML;
-
-        if (title.toLowerCase().substring(0, input.length) == input || notice.toLowerCase().substring(0, input.length) == input) {
+        let category = cards[i].querySelector('.category').innerHTML;
+    
+        if (title.toLowerCase().substring(0, input.length) == input || notice.toLowerCase().substring(0, input.length) == input || category.toLowerCase().substring(0, input.length) == input) {
             cards[i].style.display = 'flex';
         } else {
             cards[i].style.display = 'none';

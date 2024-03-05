@@ -54,8 +54,10 @@ function pushContactsByAlphabet() {
  */
 function overlayAddTaskContacts(email){
     taskForUser = email;
-    let popup = document.getElementById('task-overlay-c');
+    let popup = document.getElementById('task-overlay');
     document.getElementById('closeAddTask').style.display = 'flex';
+    document.getElementById('header').classList.add('d-none');
+    document.getElementById('body').style.overflowY = 'hidden';
     popup.style.display = 'block';
 }
 
@@ -382,8 +384,10 @@ function getRandomColor() {
 
 
 function closeAddTaskPopUpC(){
-  let popup = document.getElementById('task-overlay-c');
-  popup.style.display = 'none'
+  let popup = document.getElementById('task-overlay');
+  popup.style.display = 'none';
+  document.getElementById('header').classList.remove('d-none');
+  document.getElementById('body').style.overflowY = '';
   assignToArray = [];
 }
 

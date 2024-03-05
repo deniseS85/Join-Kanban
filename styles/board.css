@@ -409,7 +409,7 @@ img, a {
 }
 
 /* Overlay Board  */
-.popUpCardBackground {
+.popUpCardBackground, .popUpCardBackgroundAddTask {
     position: fixed;
     display: flex;
     top: 0;
@@ -438,10 +438,7 @@ img, a {
 
 .popup-card-content {
     position: relative;
-    width: 500px;
     width: clamp(31.25rem, 25.7576rem + 15.1515vw, 50rem);
-    height: 788px;
-    height: clamp(49.25rem, 45.3687rem + 10.7071vw, 62.5rem);
     flex-direction: column;
     align-items: flex-start;
     padding: 40px;
@@ -449,6 +446,30 @@ img, a {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 }
+@media screen and (min-height: 800px) and (max-height: 900px) {
+    .popup-card-content, .task-content {
+        height: 700px;
+    }
+    .subtask-content {
+        height: auto !important;
+    }
+    .assigned-people {
+        min-height: 260px !important;
+        max-height: 260px !important;
+    }
+    .assigned-people-overlay {
+        height: 260px;
+    }
+}
+
+@media screen and (max-height: 792px) and (min-height: 320px) {
+    .popup-card-content, .task-content {
+        height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+
 
 .header-overlay {
     display: flex;
@@ -456,7 +477,7 @@ img, a {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-   /*  height: 46px; */
+
 }
 
 .header-overlay img {
@@ -698,6 +719,21 @@ img, a {
     resize: none;
 }
 
+.template-add-task {
+    width: 100%;
+    display: flex;
+   /*  justify-content: center; */
+    padding-bottom: 50px;
+   /*  overflow-y: auto; */
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .template-add-task {
+        justify-content: center;
+    }
+    
+}
+
 .due-date-edit-overlay {
     display: flex;
     flex-direction: column;
@@ -815,22 +851,42 @@ img, a {
 }
 
 .task-content {
-    padding: 48px 50px 98px 50px;
+    padding: 50px;
     font-family: 'Inter', sans-serif;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+    width: 965px;
+}
+@media only screen and (max-width: 842px) and (min-width: 769px) {
+    .task-content {
+        max-height: 868px;
+    }
+}
+
+@media only screen and (min-width: 769px) and  (max-width: 1103px) {
+    .task-content {
+        max-height: 868px;
+        padding-top: 0;
+        width: 696px;
+    }
+    .header-task-overlay {
+        height: 50px;
+    }
 }
 
 .task-content button {
     box-shadow: none;
 }
 
+
 .header-task-overlay {
     display: flex!important;
     justify-content: space-between!important;
-    align-items: flex-start!important;
-    margin: auto!important;
+    align-items: center!important;
+    height: 50px ;
+    margin-bottom: 30px;
+    margin-top: 30px;
     width: 100%!important;
 }
 
@@ -1010,7 +1066,6 @@ img, a {
     font-size: 21px;
     justify-content: center;
     align-items: center;
-    /* padding: 60px 80px; */
     position: fixed;
     display: flex;
     align-items: center;
@@ -1018,7 +1073,6 @@ img, a {
     left: 0;
     right: 0;
     bottom: 0;
-   /*  height: 100vh; */
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 0;
     animation: bg 225ms forwards;
@@ -1154,13 +1208,6 @@ img, a {
     }
 }
 
-@media (max-width: 1035px) {
-    #closeAddTask {
-        position: absolute;
-        top: 20px;
-        right: 2px;
-    }
-}
 
 @media (max-width: 1024px) {
     .header-board {
@@ -1209,7 +1256,30 @@ img, a {
     .input-container, .input-field {
         height: 19px;
     }
+    .task-content {
+        width: 100%;
+        border-radius: unset;
+        background-color: #F5F5F5;
+       /*  overflow-y: auto; */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+    .popUpCardBackgroundAddTask {
+        background-color: transparent;
+        z-index: 3;
+        padding-top: 118px;
+    }
+    
+    
 }
+
+@media only screen and (min-width: 662px) and (max-width: 730px) {
+    .task-content {
+        width: clamp(41.375rem, -2.9258rem + 115.2542vw, 45.625rem) !important;
+    }
+  }
 
 @media (max-width: 579px) {
     .textarea-edit-overlay {
@@ -1217,12 +1287,15 @@ img, a {
         min-height: 84px;
         padding: 5px 10px;
     }
-    /* .assign-container {
-        width: 94%;
-    } */
+ 
     .subtask-content {
         background: #F4F4F4;
         max-height: unset;
+    }
+    .popUpCardBackground {
+        background-color: transparent;
+        z-index: 3;
+        padding-top: 118px;
     }
     .content-fix-board {
         position: unset;
@@ -1237,17 +1310,14 @@ img, a {
     .create-task-mobile {
         display: flex!important;
     }
-    .popUpCardBackground {
-        background-color: transparent;
-        z-index: 3;
-        padding-top: 190px;
-    }
-    .popup-card-content, .task-content {
+    .popup-card-content {
         height: 100vh;
         width: 100%;
         border-radius: unset;
         background-color: #F5F5F5;
+        padding-top: 175px;
     }
+    
     .category-overlay, .title-overlay, .notice-overlay, .text-overlay, .current-date-overlay {
         font-size: 20px;
     }
@@ -1277,12 +1347,7 @@ img, a {
     .footer-overlay img {
         margin-top: 10px;
     }
-    /* .header-overlay {
-        margin-bottom: 20px;
-    } */
-    /* .card-text-overlay {
-        margin-bottom: 20px;
-    } */
+ 
     .section-overlay {
         width: 100%;
         margin: 8px 0;
@@ -1340,10 +1405,6 @@ img, a {
 
 /* Mobile Device S, M & L*/
 @media (max-width: 425px) {
-    #closeAddTask {
-        top: 20px;
-        right: 20px;
-    }
     .confirm-delete-mail {
         padding: 60px 10px;
     }
@@ -1495,17 +1556,20 @@ img, a {
         overflow-y: scroll;
     }
     .task-content {
-        width: 93%;
+        width: 100%;
         position: absolute;
         top: 0;
         left: 0px;
         right: 0px;
         bottom: 0;
         padding-top: 56px;
-        padding-left: 46px;
-        height: 85vh;
-        overflow-y: scroll;
+        /* padding: 50px 10px !important; */
+        overflow-y: auto;
         margin-bottom: 50px;
+    }
+    .header-task-overlay {
+        width: 90% !important;
+        
     }
     .header-overlay {
         width: 94%;
@@ -1548,11 +1612,7 @@ img, a {
     .assigned-people div {
         font-size: 12px;
     }
-/*     .footer-overlay {
-        bottom: 152px;
-        right: 39px;
-        flex-direction: unset;
-    } */
+
     .footer-overlay img {
         width: 36px;
         height: 36px;
@@ -1564,10 +1624,7 @@ img, a {
         font-size: 16px;
         margin-top: 10px;
     }
-    /* .due-date {
-        height: 4px;
-        font-size: 16px;
-    } */
+  
     .prio-edit-overlay {
         width: 89%;
     }
@@ -1608,9 +1665,7 @@ img, a {
     .card-text-overlay {
         width: 93%;
     }
-   /*  .title-edit-overlay {
-        margin-top: 10px;
-    } */
+
     .drag-menu {
         width: 83%;
         height: 77%;
@@ -1626,33 +1681,13 @@ img, a {
     h1 {
         font-size: 32px!important;
     }
-    #closeAddTask {
-        right: 83px;
-    }
+  
     .footer-overlay-edit {
         width: 94%;
     }
-    .task-content {
-        padding-left: 64px;
-    }
 }
 
-@media (max-width: 375px) {
-    .task-content {
-        padding-left: 52px
-    }
-    #closeAddTask { 
-        right: 65px;
-    }
-    
-}
 @media (max-width:320px) {
-    .task-content {
-        padding-left: 23px;
-    }
-    #closeAddTask {
-        right: 27px;
-    }
     .assign-content {
         width: 94%;
     }
@@ -1660,3 +1695,15 @@ img, a {
         width: 88%;
     }
 }
+
+@media only screen and (max-height: 1054px) and (max-width: 768px) {
+    #add_task-main {
+       /*  overflow-y: auto; */
+        margin-bottom: 124px;
+        min-height: 100vh;
+    }
+  }
+
+
+
+
