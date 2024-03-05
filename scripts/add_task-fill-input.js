@@ -116,7 +116,6 @@ function selectContact(i) {
         checkbox.innerHTML = '';
         let nrInAssignToArray = searchIndexInArrayEmail(usersArray[i]['email'], assignToArray);
         assignToArray.splice(nrInAssignToArray, 1);
-        //console.log('delete', i, 'from assignedToArray');
     } else {
         checkbox.innerHTML = '<div class="assign-checkbox-selected"></div>';
         if(i < (usersArray.length)) {
@@ -126,6 +125,40 @@ function selectContact(i) {
         }
     }
     updateAssignedToHeadline();
+    updateAssignedTo();
+}
+
+function updateAssignedTo() {
+    let assignedPeoplePreview = document.getElementById('assigned-people-preview');
+    let assignedPeopleHTML = '';
+
+    for (let i = 0; i < assignToArray.length; i++) {
+        const userInfo = getUserInfoByEmail(assignToArray[i]);
+
+        assignedPeopleHTML += /*html*/`
+            <div class="assigned-people-name">
+                <div class="one" style="background:${userInfo.color}">${userInfo.initials}</div>
+            </div>`;
+    }
+
+    assignedPeoplePreview.innerHTML = assignedPeopleHTML;
+    if (assignedPeoplePreview.innerHTML.length > 0) {
+        document.getElementById("templateAddTask").style.paddingBottom = '90px';
+    } else {
+        document.getElementById("templateAddTask").style.paddingBottom = '50px';
+    }
+}
+
+function getUserInfoByEmail(email) {
+    for (let i = 0; i < usersArray.length; i++) {
+        if (usersArray[i].email === email) {
+            return {
+                initials: usersArray[i].initials,
+                color: usersArray[i].color
+            };
+        }
+    }
+    return {};
 }
 
 
@@ -138,6 +171,7 @@ function showCheckboxesAssignedTo() {
         document.getElementById("checkboxes-assigned_to").classList.add('expand');
         document.getElementById("select-assign_to").classList.add('selectBox-focus');
         expandedAssignedTo = true;
+        /* taskContainer.style.height = (taskContainer.scrollHeight +  checkboxesAssignedTo.scrollHeight) + 'px'; */
     } else {
         closeDropdownAssignedTo();
     }

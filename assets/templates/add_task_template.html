@@ -6,7 +6,7 @@
 </div>
 
 <div id="add_task-main" class="add_task-main-board" onclick="closeToolTip(this)">
-    <div class="add_task-content-container">
+    <div class="add_task-content-container" id="templateAddTask">
         <div class="header-task-overlay">
             <h1>Add Task</h1>
             <img id="closeAddTask" style="display: none;" onclick="closePopUpAddTask()" src=assets/img/close.png>
@@ -115,13 +115,12 @@
                             <button onclick="sendInvite()" type="button"><img src="./assets/img/checkmark.png" alt="check mark" class="not-markable"></button>
                         </div>              <!-- error-container -->
                         <div id="error-invite_contact" class="" style="padding: 0;"></div>
-
-
-
-                        <!-- ########## -->
-                        <div class="assigned-people-edit"></div>
+                        <div id="assigned-people-preview" class="assigned-people-edit"></div>
                     </div>
+                   
                 </div>
+
+                
             </div>
 
             <!-- ========== CONTAINER 4 (right-bottom / last in row) ========== -->

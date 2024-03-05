@@ -900,7 +900,7 @@ form {
     a.link {
         width: 25%;
     }
-    a.link.active-link {
+    a.link.active-link, a.link:hover {
         width: 25%;
         height: 64px;
         display: flex;

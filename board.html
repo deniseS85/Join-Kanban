@@ -11,7 +11,7 @@
     <script src="scripts/add_task.js"></script>
     <script src="scripts/add_task-check.js"></script>
     <script src="scripts/add_task-render.js"></script>
-    <script src="./scripts/add_task-fill-input.js"></script>
+    <script src="scripts/add_task-fill-input.js"></script>
     <script src="scripts/board.js"></script>
     <script src="scripts/board_requests.js"></script>
     <script src="scripts/drag_and_drop.js"></script>
@@ -116,7 +116,7 @@
         <div id="task-overlay" style="display: none;">
             <div class="popUpCardBackgroundAddTask" onclick="closePopUpAddTask()">
                 <div class="task-content" onclick="doNotCloseOverlay(event)">
-                    <div class="template-add-task" w3-include-html="assets/templates/add_task_template.html"></div>
+                    <div class="template-add-task" id="templateAddTask" w3-include-html="assets/templates/add_task_template.html" style="padding-bottom: 50px;"></div>
                 </div>
             </div>
         </div>

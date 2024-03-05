@@ -249,7 +249,8 @@ function clearTasks() {
     clearVariables();
     clearPrioSelection(document.getElementById('prio-urgent'), document.getElementById('prio-medium'), document.getElementById('prio-low'));
     clearDropdowns();
-    clearNewSubtask()
+    clearNewSubtask();
+    clearAssignPreview();
 }
 
 
@@ -291,6 +292,11 @@ function createTaskMessage() {
     setTimeout(() => {
         window.location = ("./board.html");
     }, '1000')
+}
+
+function clearAssignPreview() {
+    let assignedPeoplePreview = document.getElementById('assigned-people-preview');
+    assignedPeoplePreview.innerHTML = '';
 }
 
 
